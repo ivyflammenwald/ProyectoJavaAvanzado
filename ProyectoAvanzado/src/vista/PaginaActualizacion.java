@@ -1,3 +1,5 @@
+package vista;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,119 +29,114 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lb_cliente = new javax.swing.JLabel();
         listaclientes = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btn_seleccionar = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lb_direccion = new javax.swing.JLabel();
+        lb_fechavenc = new javax.swing.JLabel();
+        lb_placas = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        botoneliminar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lb_titulo_act = new javax.swing.JLabel();
+        lb_fechainic = new javax.swing.JLabel();
+        btn_guardar = new javax.swing.JButton();
+        btn_borrar = new javax.swing.JButton();
+        lb_eliminar = new javax.swing.JLabel();
+        lb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nombre del cliente");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
-
-        jLabel2.setText("Cliente a editar");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        lb_cliente.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_cliente.setText("Cliente a editar");
+        jPanel1.add(lb_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jButton1.setText("Seleccionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_seleccionar.setText("Seleccionar");
+        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_seleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+        jPanel1.add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 130, -1));
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 130, -1));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 130, -1));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, -1));
 
-        jLabel3.setText("Dirección");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, -1, -1));
+        lb_direccion.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_direccion.setText("Dirección cliente");
+        jPanel1.add(lb_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 20));
 
-        jLabel5.setText("Fecha de vencimiento");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, -1, -1));
+        lb_fechavenc.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_fechavenc.setText("Fecha de vencimiento");
+        jPanel1.add(lb_fechavenc, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
 
-        jLabel6.setText("Placas del vehículo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
+        lb_placas.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_placas.setText("Placas del vehículo");
+        jPanel1.add(lb_placas, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 120, -1));
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 130, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 130, -1));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 130, -1));
 
-        jLabel9.setText("jLabel9");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
+        lb_titulo_act.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_titulo_act.setText("Actualización de registros");
+        jPanel1.add(lb_titulo_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
-        jLabel7.setText("Fecha de inicio");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        lb_fechainic.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_fechainic.setText("Fecha de inicio");
+        jPanel1.add(lb_fechainic, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
 
-        jButton2.setText("Guardar cambios");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
+        btn_guardar.setText("Guardar cambios");
+        jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
-        botoneliminar.setText("Borrar");
-        botoneliminar.addActionListener(new java.awt.event.ActionListener() {
+        btn_borrar.setText("Borrar");
+        btn_borrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botoneliminarActionPerformed(evt);
+                btn_borrarActionPerformed(evt);
             }
         });
-        jPanel1.add(botoneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
+        jPanel1.add(btn_borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
-        jLabel4.setText("Eliminar este registro");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
+        lb_eliminar.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
+        lb_eliminar.setText("Eliminar este registro");
+        jPanel1.add(lb_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/teal2.jpg"))); // NOI18N
-        jLabel8.setText("jLabel8");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
+        lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/teal2.jpg"))); // NOI18N
+        lb_fondo.setText("jLabel8");
+        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,13 +146,9 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_btn_seleccionarActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
@@ -173,9 +166,9 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
-    private void botoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoneliminarActionPerformed
+    private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botoneliminarActionPerformed
+    }//GEN-LAST:event_btn_borrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,24 +206,22 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botoneliminar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton btn_borrar;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_seleccionar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lb_cliente;
+    private javax.swing.JLabel lb_direccion;
+    private javax.swing.JLabel lb_eliminar;
+    private javax.swing.JLabel lb_fechainic;
+    private javax.swing.JLabel lb_fechavenc;
+    private javax.swing.JLabel lb_fondo;
+    private javax.swing.JLabel lb_placas;
+    private javax.swing.JLabel lb_titulo_act;
     private javax.swing.JComboBox<String> listaclientes;
     // End of variables declaration//GEN-END:variables
 }
