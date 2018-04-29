@@ -29,6 +29,9 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }
     
     private void llenarClientesAct(){
+        listaclientes.addItem("cliente 1");
+        listaclientes.addItem("cliente 2");
+        listaclientes.addItem("cliente 3");
         /* 
         se llena la lista listaclientes con todos los clientes de la tabla para elegir uno para editar
         
@@ -41,6 +44,10 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         en la consulta que se esta alterando
         */
         System.out.println(dir+f1+f2+placa); 
+    }
+    
+    private void borrarBaseDatos(){
+        
     }
 
     /**
@@ -79,7 +86,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         jPanel1.add(lb_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 160, -1));
 
         btn_seleccionar.setText("Seleccionar");
         btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +94,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
                 btn_seleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        jPanel1.add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
 
         jt_get_venc_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +182,22 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:listaclientes
+       String cliete_sel = (String)listaclientes.getSelectedItem();
+        System.out.println("cliente_sel");
+        //obtener mediante la base de datos los siguientes elementos
+        String editdir = "nombre a editar";// obtener de db
+        String  fechaini = "fechainicialanterior";
+        String fechafin="fechafinanterior";
+        String placaant = "placa anterior";
+        
+        // imprimir los valores en los text para que sean modificados
+        
+        jt_get_dir_nueva.setText(editdir);
+        jt_get_fecha_nueva.setText(fechaini);
+        jt_get_venc_nuevo.setText(fechafin);
+        jt_get_placas_nuev.setText()
+       
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
     private void jt_get_dir_nuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_get_dir_nuevaActionPerformed
@@ -196,6 +218,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
+        borrarBaseDatos();
     }//GEN-LAST:event_btn_borrarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
@@ -205,6 +228,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         String nuevoinicio = jt_get_fecha_nueva.getText();
         String nuevofin =jt_get_venc_nuevo.getText();
         String placanueva = jt_get_placas_nuev.getText();
+        
         
         agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
   

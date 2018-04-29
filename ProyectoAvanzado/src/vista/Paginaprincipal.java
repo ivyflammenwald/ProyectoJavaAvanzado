@@ -15,6 +15,9 @@ public class Paginaprincipal extends javax.swing.JFrame {
     /**
      * Creates new form Paginaprincipal
      */
+    
+    
+    
     public Paginaprincipal() {
         initComponents();
         this.initialize();
@@ -35,8 +38,6 @@ public class Paginaprincipal extends javax.swing.JFrame {
         listafacturas = new javax.swing.JComboBox<>();
         listapolizas = new javax.swing.JComboBox<>();
         clientesabuscar = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        desplegar_consultas = new javax.swing.JTextArea();
         btn_editar_registro = new javax.swing.JToggleButton();
         btn_consultar = new javax.swing.JButton();
         lb_usuarios_select = new javax.swing.JLabel();
@@ -46,6 +47,8 @@ public class Paginaprincipal extends javax.swing.JFrame {
         lb_clientes_select = new javax.swing.JLabel();
         lb_proyectotitulo = new javax.swing.JLabel();
         lb_resultado_consultas = new javax.swing.JLabel();
+        lb_mostrar_consultas = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,22 +95,16 @@ public class Paginaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
 
-        desplegar_consultas.setColumns(20);
-        desplegar_consultas.setRows(5);
-        jScrollPane1.setViewportView(desplegar_consultas);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 610, 120));
-
         btn_editar_registro.setText("Editar registros");
         btn_editar_registro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editar_registroActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_editar_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, -1, -1));
+        jPanel1.add(btn_editar_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
 
         btn_consultar.setText("Consultar");
-        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, -1, -1));
+        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, -1, -1));
 
         lb_usuarios_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
         lb_usuarios_select.setText("Usuarios a consultar");
@@ -138,10 +135,28 @@ public class Paginaprincipal extends javax.swing.JFrame {
 
         lb_resultado_consultas.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         lb_resultado_consultas.setText("Resultado de consultas");
-        jPanel1.add(lb_resultado_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+        jPanel1.add(lb_resultado_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        jPanel1.add(lb_mostrar_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 247, 580, 170));
+
+        jPanel2.setBackground(new java.awt.Color(229, 191, 244));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 45, 71)));
+        jPanel2.setForeground(new java.awt.Color(165, 143, 143));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 178, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 590, 180));
 
         lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/fondomorado_1.jpg"))); // NOI18N
-        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 470));
+        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,7 +171,7 @@ public class Paginaprincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaclientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_listaclientesActionPerformed
@@ -226,7 +241,12 @@ public class Paginaprincipal extends javax.swing.JFrame {
     la opcion ninguno de cada lista excluye esta entidad de la consulta, mientras que todo
     muestra todos los atributos
     */
+
+    
+
+
     private void initialize(){
+        
         listaclientes.removeAllItems();
         listafacturas.removeAllItems();
         listapolizas.removeAllItems();
@@ -265,12 +285,12 @@ public class Paginaprincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_consultar;
     private javax.swing.JToggleButton btn_editar_registro;
     private javax.swing.JComboBox<String> clientesabuscar;
-    private javax.swing.JTextArea desplegar_consultas;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lb_clientes_select;
     private javax.swing.JLabel lb_facturas_select;
     private javax.swing.JLabel lb_fondo;
+    private javax.swing.JLabel lb_mostrar_consultas;
     private javax.swing.JLabel lb_polizas_select;
     private javax.swing.JLabel lb_proyectotitulo;
     private javax.swing.JLabel lb_resultado_consultas;
