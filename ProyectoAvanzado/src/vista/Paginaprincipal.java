@@ -17,6 +17,7 @@ public class Paginaprincipal extends javax.swing.JFrame {
      */
     public Paginaprincipal() {
         initComponents();
+        this.initialize();
     }
 
     /**
@@ -33,9 +34,9 @@ public class Paginaprincipal extends javax.swing.JFrame {
         listavehiculos = new javax.swing.JComboBox<>();
         listafacturas = new javax.swing.JComboBox<>();
         listapolizas = new javax.swing.JComboBox<>();
+        clientesabuscar = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         desplegar_consultas = new javax.swing.JTextArea();
-        clientesabuscar = new javax.swing.JComboBox<>();
         btn_editar_registro = new javax.swing.JToggleButton();
         btn_consultar = new javax.swing.JButton();
         lb_usuarios_select = new javax.swing.JLabel();
@@ -83,19 +84,19 @@ public class Paginaprincipal extends javax.swing.JFrame {
         });
         jPanel1.add(listapolizas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, -1, -1));
 
-        desplegar_consultas.setColumns(20);
-        desplegar_consultas.setRows(5);
-        jScrollPane1.setViewportView(desplegar_consultas);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 610, 120));
-
         clientesabuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         clientesabuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientesabuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
+        jPanel1.add(clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+
+        desplegar_consultas.setColumns(20);
+        desplegar_consultas.setRows(5);
+        jScrollPane1.setViewportView(desplegar_consultas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 610, 120));
 
         btn_editar_registro.setText("Editar registros");
         btn_editar_registro.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +122,7 @@ public class Paginaprincipal extends javax.swing.JFrame {
         jPanel1.add(lb_facturas_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, 30));
 
         lb_vehiculos_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_vehiculos_select.setText("Vehículos");
+        lb_vehiculos_select.setText("Vehiculos");
         jPanel1.add(lb_vehiculos_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, 30));
 
         lb_clientes_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
@@ -139,8 +140,8 @@ public class Paginaprincipal extends javax.swing.JFrame {
         lb_resultado_consultas.setText("Resultado de consultas");
         jPanel1.add(lb_resultado_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
 
-        lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondomorado_1.jpg"))); // NOI18N
-        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 470));
+        lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/fondomorado_1.jpg"))); // NOI18N
+        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,6 +179,8 @@ public class Paginaprincipal extends javax.swing.JFrame {
 
     private void btn_editar_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editar_registroActionPerformed
         // TODO add your handling code here:
+        PaginaActualizacion actualreg = new PaginaActualizacion();
+        actualreg.setVisible(true);
     }//GEN-LAST:event_btn_editar_registroActionPerformed
 
     /**
@@ -214,6 +217,49 @@ public class Paginaprincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    /*
+    las listas siguientes contienen los atributos para cada entidad (tabla), la ultima
+    contiene los nombres de todos los clientes y la opcion para seleccionar a todos
+    
+    la opcion ninguno de cada lista excluye esta entidad de la consulta, mientras que todo
+    muestra todos los atributos
+    */
+    private void initialize(){
+        listaclientes.removeAllItems();
+        listafacturas.removeAllItems();
+        listapolizas.removeAllItems();
+        clientesabuscar.removeAllItems();
+        listavehiculos.removeAllItems();
+        listaclientes.addItem("-Ninguno-");
+        listaclientes.addItem("-Todo-");
+        listaclientes.addItem("Nombre");
+        listaclientes.addItem("Dirección");
+        listafacturas.addItem("-Ninguno-");
+        listafacturas.addItem("Monto");
+        listapolizas.addItem("-Ninguno-");
+        listapolizas.addItem("-Todo-");
+        listapolizas.addItem("Costo");
+        listapolizas.addItem("Prima");
+        listapolizas.addItem("Apertura");
+        listapolizas.addItem("Vencimiento");
+        listavehiculos.addItem("-Ninguno-");
+        listavehiculos.addItem("-Todo-");
+        listavehiculos.addItem("Placas");
+        listavehiculos.addItem("Marca");
+        listavehiculos.addItem("Modelo");
+        clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
+        
+}
+    
+    public void llenarClientes(){ //EMANUEL hay que definir este metodo
+        /*
+        esta funcion toma los clientes de las tablas sql y los inserta en la ultima lista de la 
+        interfaz, con esa lista se selecciona para que clientes se desea hacer la consulta 
+        */
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_consultar;
@@ -236,3 +282,4 @@ public class Paginaprincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> listavehiculos;
     // End of variables declaration//GEN-END:variables
 }
+

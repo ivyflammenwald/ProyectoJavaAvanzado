@@ -1,5 +1,8 @@
 package vista;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +20,27 @@ public class PaginaActualizacion extends javax.swing.JFrame {
      */
     public PaginaActualizacion() {
         initComponents();
+        this.initialize();
+    }
+    
+    private void initialize(){
+        listaclientes.removeAllItems();
+        this.llenarClientesAct();
+    }
+    
+    private void llenarClientesAct(){
+        /* 
+        se llena la lista listaclientes con todos los clientes de la tabla para elegir uno para editar
+        
+        */
+    }
+
+    private void agregaraBaseDatos(String dir, String f1, String f2, String placa){
+        /*este metodo se invoca cuando se actualiza un usuario
+        se usa para anexar los datos a la base de datos
+        en la consulta que se esta alterando
+        */
+        System.out.println(dir+f1+f2+placa); 
     }
 
     /**
@@ -32,13 +56,13 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         lb_cliente = new javax.swing.JLabel();
         listaclientes = new javax.swing.JComboBox<>();
         btn_seleccionar = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jt_get_venc_nuevo = new javax.swing.JTextField();
+        jt_get_dir_nueva = new javax.swing.JTextField();
         lb_direccion = new javax.swing.JLabel();
         lb_fechavenc = new javax.swing.JLabel();
         lb_placas = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jt_get_placas_nuev = new javax.swing.JTextField();
+        jt_get_fecha_nueva = new javax.swing.JTextField();
         lb_titulo_act = new javax.swing.JLabel();
         lb_fechainic = new javax.swing.JLabel();
         btn_guardar = new javax.swing.JButton();
@@ -65,19 +89,19 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         });
         jPanel1.add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jt_get_venc_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jt_get_venc_nuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
+        jPanel1.add(jt_get_venc_nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jt_get_dir_nueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jt_get_dir_nuevaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, -1));
+        jPanel1.add(jt_get_dir_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, -1));
 
         lb_direccion.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
         lb_direccion.setText("Dirección cliente");
@@ -91,19 +115,19 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         lb_placas.setText("Placas del vehículo");
         jPanel1.add(lb_placas, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, -1, -1));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jt_get_placas_nuev.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                jt_get_placas_nuevActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 130, -1));
+        jPanel1.add(jt_get_placas_nuev, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 130, -1));
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jt_get_fecha_nueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                jt_get_fecha_nuevaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 130, -1));
+        jPanel1.add(jt_get_fecha_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 130, -1));
 
         lb_titulo_act.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
         lb_titulo_act.setText("Actualización de registros");
@@ -114,6 +138,11 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         jPanel1.add(lb_fechainic, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
 
         btn_guardar.setText("Guardar cambios");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
         btn_borrar.setText("Borrar");
@@ -128,9 +157,8 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         lb_eliminar.setText("Eliminar este registro");
         jPanel1.add(lb_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
-        lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/teal2.jpg"))); // NOI18N
-        lb_fondo.setText("jLabel8");
-        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
+        lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/teal2.jpg"))); // NOI18N
+        jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,25 +178,38 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jt_get_dir_nuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_get_dir_nuevaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jt_get_dir_nuevaActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jt_get_venc_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_get_venc_nuevoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jt_get_venc_nuevoActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void jt_get_placas_nuevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_get_placas_nuevActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_jt_get_placas_nuevActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void jt_get_fecha_nuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_get_fecha_nuevaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_jt_get_fecha_nuevaActionPerformed
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_borrarActionPerformed
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        // TODO add your handling code here:
+        
+        String nuevadir = jt_get_dir_nueva.getText();
+        String nuevoinicio = jt_get_fecha_nueva.getText();
+        String nuevofin =jt_get_venc_nuevo.getText();
+        String placanueva = jt_get_placas_nuev.getText();
+        
+        agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
+  
+        this.dispose();
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,10 +251,10 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_seleccionar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jt_get_dir_nueva;
+    private javax.swing.JTextField jt_get_fecha_nueva;
+    private javax.swing.JTextField jt_get_placas_nuev;
+    private javax.swing.JTextField jt_get_venc_nuevo;
     private javax.swing.JLabel lb_cliente;
     private javax.swing.JLabel lb_direccion;
     private javax.swing.JLabel lb_eliminar;
