@@ -5,7 +5,9 @@
  */
 package principal;
 
+import controlador.Controlador;
 import modelo.Modelo;
+import vista.PaginaActualizacion;
 import vista.Vista;
 /**
  *
@@ -14,6 +16,10 @@ import vista.Vista;
 public class Main {
     public static void main(String[] args) {
         Modelo model = new Modelo();
+        Vista view = new Vista();
+        PaginaActualizacion pag= new PaginaActualizacion();
+        
+        Controlador cntr = new Controlador(view,model,pag );
         
         model.subirXML();
     }

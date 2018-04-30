@@ -21,7 +21,6 @@ public class Vista extends javax.swing.JFrame {
     
     public Vista() {
         initComponents();
-        this.initialize();
     }
 
     /**
@@ -206,37 +205,12 @@ public class Vista extends javax.swing.JFrame {
 
     private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
         // TODO add your handling code here:
-        
-        String atrib_cliente = (String)jl_listaclientes.getSelectedItem();
-        String atrib_vehic = (String)jl_listavehiculos.getSelectedItem();
-        String atrib_poliza = (String)jl_listapolizas.getSelectedItem();
-        String atrib_factura = (String)jl_listafacturas.getSelectedItem();
-        
-        int cli_abuscar = jl_listaclientes.getSelectedIndex();
-        
-        //Modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
-        ArrayList <String> parametros_consulta = new ArrayList<String>();
-        parametros_consulta.add(atrib_cliente);
-        parametros_consulta.add(atrib_vehic);
-        parametros_consulta.add(atrib_factura);
-        parametros_consulta.add(atrib_poliza);
-        String consulta_hecha=""; //va a almacenar todo en un solo parrafo
-        
-        ArrayList <String> consultas_imprimir;
-        
-        consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
-       
-        
-        for (String tupla : consultas_imprimir){
-            consulta_hecha+=tupla;
-            consulta_hecha+="\n";
-        }
-        
-        
-        
-        lb_mostrar_consultas.setText(consulta_hecha);
     }//GEN-LAST:event_btn_consultarActionPerformed
 
+    
+    
+    //main, no modificar
+    
     /**
      * @param args the command line arguments
      */
@@ -282,66 +256,25 @@ public class Vista extends javax.swing.JFrame {
     muestra todos los atributos
     */
 
-    
-
-
-    private void initialize(){
-        
-        jl_listaclientes.removeAllItems();
-        jl_listafacturas.removeAllItems();
-        jl_listapolizas.removeAllItems();
-        jl_clientesabuscar.removeAllItems();
-        jl_listavehiculos.removeAllItems();
-      
-        jl_listaclientes.addItem("-Todo-");
-        jl_listaclientes.addItem("Nombre");
-        jl_listaclientes.addItem("Dirección");
-
-        jl_listafacturas.addItem("Monto");
-        
-        jl_listapolizas.addItem("-Todo-");
-        jl_listapolizas.addItem("Costo");
-        jl_listapolizas.addItem("Prima");
-        jl_listapolizas.addItem("Apertura");
-        jl_listapolizas.addItem("Vencimiento");
-       
-        jl_listavehiculos.addItem("-Todo-");
-        jl_listavehiculos.addItem("Placas");
-        jl_listavehiculos.addItem("Marca");
-        jl_listavehiculos.addItem("Modelo");
-        
-        jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
-        
-       ArrayList <String> llenado = Modelo.llenarClientes();
-       
-        
-        for( String agregar : llenado){
-            jl_clientesabuscar.addItem(agregar);
-        }
-
-       
-}
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_consultar;
-    private javax.swing.JToggleButton btn_editar_registro;
+    public javax.swing.JButton btn_consultar;
+    public javax.swing.JToggleButton btn_editar_registro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JComboBox<String> jl_clientesabuscar;
-    private javax.swing.JComboBox<String> jl_listaclientes;
-    private javax.swing.JComboBox<String> jl_listafacturas;
-    private javax.swing.JComboBox<String> jl_listapolizas;
-    private javax.swing.JComboBox<String> jl_listavehiculos;
-    private javax.swing.JLabel lb_clientes_select;
-    private javax.swing.JLabel lb_facturas_select;
-    private javax.swing.JLabel lb_fondo;
-    private javax.swing.JLabel lb_mostrar_consultas;
-    private javax.swing.JLabel lb_polizas_select;
-    private javax.swing.JLabel lb_proyectotitulo;
-    private javax.swing.JLabel lb_resultado_consultas;
-    private javax.swing.JLabel lb_usuarios_select;
-    private javax.swing.JLabel lb_vehiculos_select;
+    public javax.swing.JComboBox<String> jl_clientesabuscar;
+    public javax.swing.JComboBox<String> jl_listaclientes;
+    public javax.swing.JComboBox<String> jl_listafacturas;
+    public javax.swing.JComboBox<String> jl_listapolizas;
+    public javax.swing.JComboBox<String> jl_listavehiculos;
+    public javax.swing.JLabel lb_clientes_select;
+    public javax.swing.JLabel lb_facturas_select;
+    public javax.swing.JLabel lb_fondo;
+    public javax.swing.JLabel lb_mostrar_consultas;
+    public javax.swing.JLabel lb_polizas_select;
+    public javax.swing.JLabel lb_proyectotitulo;
+    public javax.swing.JLabel lb_resultado_consultas;
+    public javax.swing.JLabel lb_usuarios_select;
+    public javax.swing.JLabel lb_vehiculos_select;
     // End of variables declaration//GEN-END:variables
 }
 

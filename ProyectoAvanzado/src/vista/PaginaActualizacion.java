@@ -21,25 +21,8 @@ public class PaginaActualizacion extends javax.swing.JFrame {
      */
     public PaginaActualizacion() {
         initComponents();
-        this.initialize();
     }
     
-    private void initialize(){ // al controlador
-        listaclientes.removeAllItems();
-        this.llenarClientesAct();
-    }
-    
-    private void llenarClientesAct(){
-         
-        ArrayList <String> agregaralista = Modelo.llenarClientes();
-        for( String cli : agregaralista){
-        listaclientes.addItem(agregaralista);
-        }
-        /* 
-        se llena la lista listaclientes con todos los clientes de la tabla para elegir uno para editar
-        
-        */
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +127,11 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
 
         btn_borrar.setText("Borrar");
+        btn_borrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_borrarMouseClicked(evt);
+            }
+        });
         btn_borrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_borrarActionPerformed(evt);
@@ -230,6 +218,10 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed
 
+    private void btn_borrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_borrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_borrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -266,22 +258,22 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_borrar;
-    private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton btn_seleccionar;
+    public javax.swing.JButton btn_borrar;
+    public javax.swing.JButton btn_guardar;
+    public javax.swing.JButton btn_seleccionar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jt_get_dir_nueva;
-    private javax.swing.JTextField jt_get_fecha_nueva;
-    private javax.swing.JTextField jt_get_placas_nuev;
-    private javax.swing.JTextField jt_get_venc_nuevo;
-    private javax.swing.JLabel lb_cliente;
-    private javax.swing.JLabel lb_direccion;
-    private javax.swing.JLabel lb_eliminar;
-    private javax.swing.JLabel lb_fechainic;
-    private javax.swing.JLabel lb_fechavenc;
-    private javax.swing.JLabel lb_fondo;
-    private javax.swing.JLabel lb_placas;
-    private javax.swing.JLabel lb_titulo_act;
-    private javax.swing.JComboBox<String> listaclientes;
+    public javax.swing.JTextField jt_get_dir_nueva;
+    public javax.swing.JTextField jt_get_fecha_nueva;
+    public javax.swing.JTextField jt_get_placas_nuev;
+    public javax.swing.JTextField jt_get_venc_nuevo;
+    public javax.swing.JLabel lb_cliente;
+    public javax.swing.JLabel lb_direccion;
+    public javax.swing.JLabel lb_eliminar;
+    public javax.swing.JLabel lb_fechainic;
+    public javax.swing.JLabel lb_fechavenc;
+    public javax.swing.JLabel lb_fondo;
+    public javax.swing.JLabel lb_placas;
+    public javax.swing.JLabel lb_titulo_act;
+    public javax.swing.JComboBox<String> listaclientes;
     // End of variables declaration//GEN-END:variables
 }
