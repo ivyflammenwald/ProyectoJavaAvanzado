@@ -2,6 +2,7 @@ package vista;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,9 +30,11 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }
     
     private void llenarClientesAct(){
-        listaclientes.addItem("cliente 1");
-        listaclientes.addItem("cliente 2");
-        listaclientes.addItem("cliente 3");
+         
+        ArrayList <String> agregaralista = Modelo.llenarClientes();
+        for( String cli : agregaralista){
+        listaclientes.addItem(agregaralista);
+        }
         /* 
         se llena la lista listaclientes con todos los clientes de la tabla para elegir uno para editar
         
@@ -220,7 +223,9 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         String nuevofin =jt_get_venc_nuevo.getText();
         String placanueva = jt_get_placas_nuev.getText();
         
-       // Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
+        int ind  = listaclientes.getSelectedIndex();
+        
+        Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva, ind);
   
         this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed

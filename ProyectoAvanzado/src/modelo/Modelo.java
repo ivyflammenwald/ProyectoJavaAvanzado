@@ -249,7 +249,7 @@ public class Modelo {
     
     ////////////////ivy metodos para actualizar
     
-    private void agregaraBaseDatos(String dir, String f1, String f2, String placa, int indice){ //AL MODELO O AL CONTROLADOR?
+    public void agregaraBaseDatos(String dir, String f1, String f2, String placa, int indice){ //AL MODELO O AL CONTROLADOR?
         /*este metodo se invoca cuando se actualiza un usuario,  se usa para anexar los datos a la base de datos  en la consulta que se esta alterando  */
         System.out.println(dir+f1+f2+placa); 
               

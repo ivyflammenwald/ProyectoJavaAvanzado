@@ -211,6 +211,7 @@ public class Vista extends javax.swing.JFrame {
         String atrib_vehic = (String)jl_listavehiculos.getSelectedItem();
         String atrib_poliza = (String)jl_listapolizas.getSelectedItem();
         String atrib_factura = (String)jl_listafacturas.getSelectedItem();
+        
         int cli_abuscar = jl_listaclientes.getSelectedIndex();
         
         //Modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
@@ -219,20 +220,19 @@ public class Vista extends javax.swing.JFrame {
         parametros_consulta.add(atrib_vehic);
         parametros_consulta.add(atrib_factura);
         parametros_consulta.add(atrib_poliza);
-        String consulta_hecha="";
+        String consulta_hecha=""; //va a almacenar todo en un solo parrafo
         
         ArrayList <String> consultas_imprimir;
-        /*  consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
         
-        String consulta_hecha="";
-        
+        consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
+       
         
         for (String tupla : consultas_imprimir){
             consulta_hecha+=tupla;
             consulta_hecha+="\n";
         }
         
-        */
+        
         
         lb_mostrar_consultas.setText(consulta_hecha);
     }//GEN-LAST:event_btn_consultarActionPerformed
@@ -312,14 +312,14 @@ public class Vista extends javax.swing.JFrame {
         
         jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
         
-       /* ArrayList <String> llenado = Modelo.llenarClientes();
+       ArrayList <String> llenado = Modelo.llenarClientes();
        
         
         for( String agregar : llenado){
             jl_clientesabuscar.addItem(agregar);
         }
 
-        */
+       
 }
     
 
