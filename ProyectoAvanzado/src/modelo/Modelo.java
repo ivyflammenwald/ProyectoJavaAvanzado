@@ -373,7 +373,7 @@ public class Modelo {
         }
         
         
-        String query = "SELECT ?,?,?,? FROM poliza INNER JOIN cliente ON cliente.id_cliente = poliza.id_cliente"
+        String query = "SELECT poliza.? , vehiculo.? , factura.?, poliza.? FROM poliza INNER JOIN cliente ON cliente.id_cliente = poliza.id_cliente"
                 + "INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
                 + "INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
                 + "  WHERE id cliente = ?"; //definir consulta

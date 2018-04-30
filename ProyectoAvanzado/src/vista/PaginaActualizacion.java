@@ -208,7 +208,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         // TODO add your handling code here:
         int indice = listaclientes.getSelectedIndex();
         System.out.println("borrado cliente "+listaclientes.getSelectedItem()+"indice "+indice); 
-        Modelo.borrarenBaseDatos(indice);
+       // Modelo.borrarenBaseDatos(indice);
         listaclientes.remove(indice);
     }//GEN-LAST:event_btn_borrarActionPerformed
 
@@ -220,7 +220,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         String nuevofin =jt_get_venc_nuevo.getText();
         String placanueva = jt_get_placas_nuev.getText();
         
-        Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
+       // Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
   
         this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed

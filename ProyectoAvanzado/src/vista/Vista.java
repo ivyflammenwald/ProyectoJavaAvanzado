@@ -219,16 +219,20 @@ public class Vista extends javax.swing.JFrame {
         parametros_consulta.add(atrib_vehic);
         parametros_consulta.add(atrib_factura);
         parametros_consulta.add(atrib_poliza);
+        String consulta_hecha="";
         
         ArrayList <String> consultas_imprimir;
-        consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
+        /*  consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
         
         String consulta_hecha="";
+        
         
         for (String tupla : consultas_imprimir){
             consulta_hecha+=tupla;
             consulta_hecha+="\n";
         }
+        
+        */
         
         lb_mostrar_consultas.setText(consulta_hecha);
     }//GEN-LAST:event_btn_consultarActionPerformed
@@ -308,11 +312,14 @@ public class Vista extends javax.swing.JFrame {
         
         jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
         
-        ArrayList <String> llenado = Modelo.llenarClientes();
+       /* ArrayList <String> llenado = Modelo.llenarClientes();
+       
         
         for( String agregar : llenado){
             jl_clientesabuscar.addItem(agregar);
         }
+
+        */
 }
     
 
