@@ -183,7 +183,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
     private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
         // TODO add your handling code here:listaclientes
-       String cliete_sel = (String)listaclientes.getSelectedItem();
+        String cliete_sel = (String)listaclientes.getSelectedItem();
         System.out.println("cliente_sel");
         //obtener mediante la base de datos los siguientes elementos
         String editdir = "nombre a editar";// obtener de db
@@ -196,7 +196,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         jt_get_dir_nueva.setText(editdir);
         jt_get_fecha_nueva.setText(fechaini);
         jt_get_venc_nuevo.setText(fechafin);
-        jt_get_placas_nuev.setText()
+        //jt_get_placas_nuev.setText()
        
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 

@@ -1,4 +1,4 @@
-/*DROP TABLE poliza;*/
+DROP TABLE poliza;
 
 DROP TABLE vehiculo;
 

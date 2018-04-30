@@ -27,4 +27,4 @@ id_vehiculo INT NOT NULL,
 id_cliente INT NOT NULL,
 FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id_vehiculo),
 FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-);*/
+)*/
