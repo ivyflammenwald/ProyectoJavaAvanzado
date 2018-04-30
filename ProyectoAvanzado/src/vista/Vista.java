@@ -1,5 +1,8 @@
 package vista;
 
+import java.util.ArrayList;
+import modelo.Modelo;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,8 +19,6 @@ public class Vista extends javax.swing.JFrame {
      * Creates new form Paginaprincipal
      */
     
-    
-    
     public Vista() {
         initComponents();
         this.initialize();
@@ -33,11 +34,11 @@ public class Vista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        listaclientes = new javax.swing.JComboBox<>();
-        listavehiculos = new javax.swing.JComboBox<>();
-        listafacturas = new javax.swing.JComboBox<>();
-        listapolizas = new javax.swing.JComboBox<>();
-        clientesabuscar = new javax.swing.JComboBox<>();
+        jl_listaclientes = new javax.swing.JComboBox<>();
+        jl_listavehiculos = new javax.swing.JComboBox<>();
+        jl_listafacturas = new javax.swing.JComboBox<>();
+        jl_listapolizas = new javax.swing.JComboBox<>();
+        jl_clientesabuscar = new javax.swing.JComboBox<>();
         btn_editar_registro = new javax.swing.JToggleButton();
         btn_consultar = new javax.swing.JButton();
         lb_usuarios_select = new javax.swing.JLabel();
@@ -55,45 +56,45 @@ public class Vista extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listaclientes.addActionListener(new java.awt.event.ActionListener() {
+        jl_listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listaclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaclientesActionPerformed(evt);
+                jl_listaclientesActionPerformed(evt);
             }
         });
-        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        jPanel1.add(jl_listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        listavehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listavehiculos.addActionListener(new java.awt.event.ActionListener() {
+        jl_listavehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listavehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listavehiculosActionPerformed(evt);
+                jl_listavehiculosActionPerformed(evt);
             }
         });
-        jPanel1.add(listavehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+        jPanel1.add(jl_listavehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
 
-        listafacturas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listafacturas.addActionListener(new java.awt.event.ActionListener() {
+        jl_listafacturas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listafacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listafacturasActionPerformed(evt);
+                jl_listafacturasActionPerformed(evt);
             }
         });
-        jPanel1.add(listafacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
+        jPanel1.add(jl_listafacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
 
-        listapolizas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listapolizas.addActionListener(new java.awt.event.ActionListener() {
+        jl_listapolizas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listapolizas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listapolizasActionPerformed(evt);
+                jl_listapolizasActionPerformed(evt);
             }
         });
-        jPanel1.add(listapolizas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, -1, -1));
+        jPanel1.add(jl_listapolizas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, -1, -1));
 
-        clientesabuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        clientesabuscar.addActionListener(new java.awt.event.ActionListener() {
+        jl_clientesabuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_clientesabuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientesabuscarActionPerformed(evt);
+                jl_clientesabuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        jPanel1.add(jl_clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
 
         btn_editar_registro.setText("Editar registros");
         btn_editar_registro.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +105,11 @@ public class Vista extends javax.swing.JFrame {
         jPanel1.add(btn_editar_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
 
         btn_consultar.setText("Consultar");
+        btn_consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, -1, -1));
 
         lb_usuarios_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
@@ -172,31 +178,60 @@ public class Vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void listaclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaclientesActionPerformed
+    private void jl_listaclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listaclientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_listaclientesActionPerformed
+    }//GEN-LAST:event_jl_listaclientesActionPerformed
 
-    private void listapolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listapolizasActionPerformed
+    private void jl_listapolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listapolizasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_listapolizasActionPerformed
+    }//GEN-LAST:event_jl_listapolizasActionPerformed
 
-    private void listavehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listavehiculosActionPerformed
+    private void jl_listavehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listavehiculosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_listavehiculosActionPerformed
+    }//GEN-LAST:event_jl_listavehiculosActionPerformed
 
-    private void listafacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listafacturasActionPerformed
+    private void jl_listafacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listafacturasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_listafacturasActionPerformed
+    }//GEN-LAST:event_jl_listafacturasActionPerformed
 
-    private void clientesabuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesabuscarActionPerformed
+    private void jl_clientesabuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_clientesabuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_clientesabuscarActionPerformed
+    }//GEN-LAST:event_jl_clientesabuscarActionPerformed
 
     private void btn_editar_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editar_registroActionPerformed
         // TODO add your handling code here:
         PaginaActualizacion actualreg = new PaginaActualizacion();
         actualreg.setVisible(true);
     }//GEN-LAST:event_btn_editar_registroActionPerformed
+
+    private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+        // TODO add your handling code here:
+        
+        String atrib_cliente = (String)jl_listaclientes.getSelectedItem();
+        String atrib_vehic = (String)jl_listavehiculos.getSelectedItem();
+        String atrib_poliza = (String)jl_listapolizas.getSelectedItem();
+        String atrib_factura = (String)jl_listafacturas.getSelectedItem();
+        int cli_abuscar = jl_listaclientes.getSelectedIndex();
+        
+        //Modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
+        ArrayList <String> parametros_consulta = new ArrayList<String>();
+        parametros_consulta.add(atrib_cliente);
+        parametros_consulta.add(atrib_vehic);
+        parametros_consulta.add(atrib_factura);
+        parametros_consulta.add(atrib_poliza);
+        
+        ArrayList <String> consultas_imprimir;
+        consultas_imprimir = Modelo.hacerConsulta(parametros_consulta, cli_abuscar);
+        
+        String consulta_hecha="";
+        
+        for (String tupla : consultas_imprimir){
+            consulta_hecha+=tupla;
+            consulta_hecha+="\n";
+        }
+        
+        lb_mostrar_consultas.setText(consulta_hecha);
+    }//GEN-LAST:event_btn_consultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,46 +283,49 @@ public class Vista extends javax.swing.JFrame {
 
     private void initialize(){
         
-        listaclientes.removeAllItems();
-        listafacturas.removeAllItems();
-        listapolizas.removeAllItems();
-        clientesabuscar.removeAllItems();
-        listavehiculos.removeAllItems();
-        listaclientes.addItem("-Ninguno-");
-        listaclientes.addItem("-Todo-");
-        listaclientes.addItem("Nombre");
-        listaclientes.addItem("Dirección");
-        listafacturas.addItem("-Ninguno-");
-        listafacturas.addItem("Monto");
-        listapolizas.addItem("-Ninguno-");
-        listapolizas.addItem("-Todo-");
-        listapolizas.addItem("Costo");
-        listapolizas.addItem("Prima");
-        listapolizas.addItem("Apertura");
-        listapolizas.addItem("Vencimiento");
-        listavehiculos.addItem("-Ninguno-");
-        listavehiculos.addItem("-Todo-");
-        listavehiculos.addItem("Placas");
-        listavehiculos.addItem("Marca");
-        listavehiculos.addItem("Modelo");
-        clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
+        jl_listaclientes.removeAllItems();
+        jl_listafacturas.removeAllItems();
+        jl_listapolizas.removeAllItems();
+        jl_clientesabuscar.removeAllItems();
+        jl_listavehiculos.removeAllItems();
+      
+        jl_listaclientes.addItem("-Todo-");
+        jl_listaclientes.addItem("Nombre");
+        jl_listaclientes.addItem("Dirección");
+
+        jl_listafacturas.addItem("Monto");
         
+        jl_listapolizas.addItem("-Todo-");
+        jl_listapolizas.addItem("Costo");
+        jl_listapolizas.addItem("Prima");
+        jl_listapolizas.addItem("Apertura");
+        jl_listapolizas.addItem("Vencimiento");
+       
+        jl_listavehiculos.addItem("-Todo-");
+        jl_listavehiculos.addItem("Placas");
+        jl_listavehiculos.addItem("Marca");
+        jl_listavehiculos.addItem("Modelo");
+        
+        jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
+        
+        ArrayList <String> llenado = Modelo.llenarClientes();
+        
+        for( String agregar : llenado){
+            jl_clientesabuscar.addItem(agregar);
+        }
 }
     
-    public void llenarClientes(){ //EMANUEL hay que definir este metodo
-        /*
-        esta funcion toma los clientes de las tablas sql y los inserta en la ultima lista de la 
-        interfaz, con esa lista se selecciona para que clientes se desea hacer la consulta 
-        */
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_consultar;
     private javax.swing.JToggleButton btn_editar_registro;
-    private javax.swing.JComboBox<String> clientesabuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox<String> jl_clientesabuscar;
+    private javax.swing.JComboBox<String> jl_listaclientes;
+    private javax.swing.JComboBox<String> jl_listafacturas;
+    private javax.swing.JComboBox<String> jl_listapolizas;
+    private javax.swing.JComboBox<String> jl_listavehiculos;
     private javax.swing.JLabel lb_clientes_select;
     private javax.swing.JLabel lb_facturas_select;
     private javax.swing.JLabel lb_fondo;
@@ -297,10 +335,6 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JLabel lb_resultado_consultas;
     private javax.swing.JLabel lb_usuarios_select;
     private javax.swing.JLabel lb_vehiculos_select;
-    private javax.swing.JComboBox<String> listaclientes;
-    private javax.swing.JComboBox<String> listafacturas;
-    private javax.swing.JComboBox<String> listapolizas;
-    private javax.swing.JComboBox<String> listavehiculos;
     // End of variables declaration//GEN-END:variables
 }
 

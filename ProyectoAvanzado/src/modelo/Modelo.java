@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -245,4 +246,243 @@ public class Modelo {
             
         }
     }
+    
+    ////////////////ivy metodos para actualizar
+    
+    private void agregaraBaseDatos(String dir, String f1, String f2, String placa, int indice){ //AL MODELO O AL CONTROLADOR?
+        /*este metodo se invoca cuando se actualiza un usuario,  se usa para anexar los datos a la base de datos  en la consulta que se esta alterando  */
+        System.out.println(dir+f1+f2+placa); 
+              
+        
+            //actualizar direccion
+        String query = "UPDATE cliente SET direccion = ? WHERE id_cliente = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setString(1,  dir);
+            ps.setInt(2, indice);
+            ps.executeUpdate();
+            System.out.println("Update exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+        
+        //actualizar fecha inicio
+        
+        query = "UPDATE poliza SET apertura = ? WHERE id_poliza  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setString(1,  f1);
+            ps.setInt(2, indice);
+            ps.executeUpdate();
+            System.out.println("Update exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+       
+       //actualizar fecha fin
+       
+        query = "UPDATE poliza SET vencimiento = ? WHERE id_poliza  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setString(1,  f2);
+            ps.setInt(2, indice);
+            ps.executeUpdate();
+            System.out.println("Update exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+        
+        //  actualizar placa
+        
+        query = "UPDATE vehiculo SET placas = ? WHERE id_vehiculo  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setString(1,  placa);
+            ps.setInt(2, indice);
+            ps.executeUpdate();
+            System.out.println("Update exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+    }
+    
+    public void borrarenBaseDatos(int indice){
+        
+        //borrar de cliente
+        String query = "DELETE FROM cliente WHERE id_cliente  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, indice);
+            ps.executeUpdate();
+            System.out.println("Delete exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+        
+        //borrar de  vehiculo
+        query = "DELETE FROM vehiculo WHERE id_vehiculo  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, indice);
+            ps.executeUpdate();
+            System.out.println("Delete exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+        
+        //borrar de poliza
+        query = "DELETE FROM poliza WHERE id_poliza  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, indice);
+            ps.executeUpdate();
+            System.out.println("Delete exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+       
+        //borrar de factura
+       
+        query = "DELETE FROM factura WHERE id_factura  = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, indice);
+            ps.executeUpdate();
+            System.out.println("Delete exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+        }
+    }
+    
+    // metodos para la vista
+    
+    
+    public ArrayList hacerConsulta(ArrayList<String> parametros, int cliabuscar){
+    
+        // se va a definir que variables se buscan 
+        // en el arraylist vienen  los string con el nombre de los atributos que se va a buscar en las tablas
+        // con este array se van a hacer las consultas, pero como no existe una columna todos, se cambia por * para que
+        //sea una consulta valida
+        
+        ArrayList<String> resultados = new ArrayList <String>();
+        
+        for (String s :parametros){
+            if(s.equals("-todos-")){ // si tiene un valor distinto a uno utilizable
+                s ="*";
+            }
+        }
+        
+        
+        String query = "SELECT ?,?,?,? FROM poliza INNER JOIN cliente ON cliente.id_cliente = poliza.id_cliente"
+                + "INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
+                + "INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
+                + "  WHERE id cliente = ?"; //definir consulta
+        
+        ResultSet rs; 
+        
+        try {
+            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, parametros.get(1));  // atrib de clientes
+            ps.setString(2, parametros.get(2)); //atrib de vehiculo
+            ps.setString(3, parametros.get(3)); //atrib de factura
+            ps.setString(4, parametros.get(4)); //atrib de poliza
+            
+            if(cliabuscar == 1){ //si seleccionaron todos los clientes
+                ps.setString(5, "*");
+            }else{
+                ps.setInt(5, cliabuscar);
+            }
+           
+            rs = ps.executeQuery(query);
+            rs = ps.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            
+            String tuplaconsulta="";
+            
+            String datoscliente ="";
+            String datosvehic="";
+            String datosfact="";
+            String datospoliza="";
+            
+            
+            while (rs.next()) {
+                
+                if(parametros.get(0).equals("*")){ //si es select * de cliente
+                    datoscliente = rs.getString("nombre");
+                    datoscliente+=" ";
+                    datoscliente+=rs.getString("direccion");
+                }else{
+                    datoscliente = rs.getString(parametros.get(0)); //el parametro es el que se haya pedido
+                }
+                
+                if(parametros.get(1).equals("*")){ //si es select * de vehiculos  
+                    datosvehic = rs.getString("placas");
+                    datosvehic+=" ";
+                    datosvehic+=rs.getString("marca");
+                    datosvehic+=" ";
+                    datosvehic+=rs.getString("modelo");
+                    datosvehic+=" ";
+                }else{
+                    datosvehic = rs.getString(parametros.get(1)); //el parametro es el que se haya pedido
+                }
+                
+               
+                datosfact = rs.getString(parametros.get(2)); //el parametro es el que se haya pedido
+                
+                
+                if(parametros.get(3).equals("*")){ //si es select * de poliza 
+                    datospoliza = rs.getString("costo");
+                    datospoliza+=" ";
+                    datospoliza+=rs.getString("prima");
+                     datospoliza+=" ";
+                    datospoliza+=rs.getString("apertura");
+                }else{
+                    datospoliza = rs.getString(parametros.get(3)); //el parametro es el que se haya pedido
+                }
+                
+                tuplaconsulta=datoscliente+", "+datosvehic+", "+datosfact+", "+datospoliza; //junta toda una tupla en un string
+                resultados.add(tuplaconsulta); //aniade el string al arreglo de resultados
+           
+                System.out.println(tuplaconsulta);
+                
+                tuplaconsulta="";
+                datosvehic="";
+                datoscliente="";
+                datosfact ="";
+                datospoliza="";
+                // print the results
+            }
+            
+            
+            rs.close();
+        } catch (Exception e) {}
+        
+        return resultados;
+       
+        
+    }
+    
+    public ArrayList llenarClientes(){ //EMANUEL hay que definir este metodo
+        //esta funcion toma los clientes de las tablas sql y los inserta en la ultima lista de la  interfaz, con esa lista se selecciona para que clientes se desea hacer la consulta
+        String query = "SELECT nombre FROM cliente";
+        ArrayList <String> clientes_agregar = new ArrayList<String>();
+        
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("llenado con exito ");
+            
+            while(rs.next()){
+                String nomb = rs.getString("nombre");
+                clientes_agregar.add(nomb);
+            }
+            rs.close();
+        } catch (Exception e) {}
+        return clientes_agregar;
+    }
 }
+

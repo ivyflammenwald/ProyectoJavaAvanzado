@@ -23,7 +23,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         this.initialize();
     }
     
-    private void initialize(){
+    private void initialize(){ // al controlador
         listaclientes.removeAllItems();
         this.llenarClientesAct();
     }
@@ -37,19 +37,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         
         */
     }
-
-    private void agregaraBaseDatos(String dir, String f1, String f2, String placa){
-        /*este metodo se invoca cuando se actualiza un usuario
-        se usa para anexar los datos a la base de datos
-        en la consulta que se esta alterando
-        */
-        System.out.println(dir+f1+f2+placa); 
-    }
     
-    private void borrarBaseDatos(){
-        
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,7 +184,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         jt_get_dir_nueva.setText(editdir);
         jt_get_fecha_nueva.setText(fechaini);
         jt_get_venc_nuevo.setText(fechafin);
-        //jt_get_placas_nuev.setText()
+        jt_get_placas_nuev.setText(placaant);
        
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
@@ -218,7 +206,10 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
-        borrarBaseDatos();
+        int indice = listaclientes.getSelectedIndex();
+        System.out.println("borrado cliente "+listaclientes.getSelectedItem()+"indice "+indice); 
+        Modelo.borrarenBaseDatos(indice);
+        listaclientes.remove(indice);
     }//GEN-LAST:event_btn_borrarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
@@ -229,8 +220,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
         String nuevofin =jt_get_venc_nuevo.getText();
         String placanueva = jt_get_placas_nuev.getText();
         
-        
-        agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
+        Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva);
   
         this.dispose();
     }//GEN-LAST:event_btn_guardarActionPerformed
