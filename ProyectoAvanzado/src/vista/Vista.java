@@ -199,8 +199,7 @@ public class Vista extends javax.swing.JFrame {
 
     private void btn_editar_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editar_registroActionPerformed
         // TODO add your handling code here:
-        PaginaActualizacion actualreg = new PaginaActualizacion();
-        actualreg.setVisible(true);
+      
     }//GEN-LAST:event_btn_editar_registroActionPerformed
 
     private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed

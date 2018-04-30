@@ -161,21 +161,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
-        // TODO add your handling code here:listaclientes
-        String cliete_sel = (String)listaclientes.getSelectedItem();
-        System.out.println("cliente_sel");
-        //obtener mediante la base de datos los siguientes elementos
-        String editdir = "nombre a editar";// obtener de db
-        String  fechaini = "fechainicialanterior";
-        String fechafin="fechafinanterior";
-        String placaant = "placa anterior";
-        
-        // imprimir los valores en los text para que sean modificados
-        
-        jt_get_dir_nueva.setText(editdir);
-        jt_get_fecha_nueva.setText(fechaini);
-        jt_get_venc_nuevo.setText(fechafin);
-        jt_get_placas_nuev.setText(placaant);
+
        
     }//GEN-LAST:event_btn_seleccionarActionPerformed
 
@@ -197,25 +183,12 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
     private void btn_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarActionPerformed
         // TODO add your handling code here:
-        int indice = listaclientes.getSelectedIndex();
-        System.out.println("borrado cliente "+listaclientes.getSelectedItem()+"indice "+indice); 
-       // Modelo.borrarenBaseDatos(indice);
-        listaclientes.remove(indice);
+     
     }//GEN-LAST:event_btn_borrarActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
-        
-        String nuevadir = jt_get_dir_nueva.getText();
-        String nuevoinicio = jt_get_fecha_nueva.getText();
-        String nuevofin =jt_get_venc_nuevo.getText();
-        String placanueva = jt_get_placas_nuev.getText();
-        
-        int ind  = listaclientes.getSelectedIndex();
-        
-        Modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva, ind);
-  
-        this.dispose();
+       
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_borrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_borrarMouseClicked

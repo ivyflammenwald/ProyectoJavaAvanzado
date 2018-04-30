@@ -32,24 +32,19 @@ public class Controlador implements ActionListener{
     
     
     this.vista.btn_consultar.addActionListener(this);
+    this.vista.btn_consultar.setActionCommand("btn_vista_consult");
+    
     this.vista.btn_editar_registro.addActionListener(this);
+    this.vista.btn_editar_registro.setActionCommand("btn_vista_editar");
     
-    /*this.vista.jl_clientesabuscar.add();
-    this.vista.jl_listaclientes.add();
-    this.vista.jl_listafacturas.add();
-    this.vista.jl_listapolizas.add();
-    this.vista.jl_listavehiculos.add();
-    
-    this.vista.lb_clientes_select.add();
-    this.vista.lb_facturas_select.add();
-    this.vista.lb_mostrar_consultas.add();
-    this.vista.lb_polizas_select.add();
-    this.vista.lb_proyectotitulo.add();
-    this.vista.lb_resultado_consultas.add();
-    this.vista.lb_usuarios_select.add();
-    this.vista.lb_vehiculos_select.add();
+    this.pag_actualizacion.btn_borrar.addActionListener(this);
+    this.pag_actualizacion.btn_borrar.setActionCommand("btn_pag_act");
    
-            */
+    this.pag_actualizacion.btn_guardar.addActionListener(this);
+    this.pag_actualizacion.btn_guardar.setActionCommand("btn_pag_guardar");
+    
+    this.pag_actualizacion.btn_seleccionar.addActionListener(this);
+    this.pag_actualizacion.btn_seleccionar.setActionCommand("btn_pag_select");
     }
     
     
@@ -104,10 +99,17 @@ public class Controlador implements ActionListener{
        
 }
 
-    @Override
+    
+    //funcion de vista para consultas
+    
     public void actionPerformed(ActionEvent e) {
          
-        String atrib_cliente = (String)vista.jl_listaclientes.getSelectedItem();
+        
+        switch (e.getActionCommand()){
+        
+            case "btn_vista_consult":
+                
+                String atrib_cliente = (String)vista.jl_listaclientes.getSelectedItem();
         String atrib_vehic = (String)vista.jl_listavehiculos.getSelectedItem();
         String atrib_poliza = (String)vista.jl_listapolizas.getSelectedItem();
         String atrib_factura = (String)vista.jl_listafacturas.getSelectedItem();
@@ -135,10 +137,81 @@ public class Controlador implements ActionListener{
         
         
         vista.lb_mostrar_consultas.setText(consulta_hecha);
-    }                                             
+                
+                break;
+                
+             case "btn_vista_editar":
+                 
+                 pag_actualizacion.setVisible(true);
+                
+                break;
+                
+            case "btn_pag_act":
+                 int indice = pag_actualizacion.listaclientes.getSelectedIndex();
+                  System.out.println("borrado cliente "+pag_actualizacion.listaclientes.getSelectedItem()+"indice "+indice); 
+                  pag_actualizacion.listaclientes.remove(indice);
+                
+                break;
+                
+             case "btn_pag_guardar":
+                 String nuevadir = pag_actualizacion.jt_get_dir_nueva.getText();
+                  String nuevoinicio = pag_actualizacion.jt_get_fecha_nueva.getText();
+                    String nuevofin =pag_actualizacion.jt_get_venc_nuevo.getText();
+                    String placanueva = pag_actualizacion.jt_get_placas_nuev.getText();
 
+                    int ind  = pag_actualizacion.listaclientes.getSelectedIndex();
+
+                    modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva, ind);
+
+                    pag_actualizacion.dispose();
+                
+                break;
+                
+            case "btn_pag_select":
+                        // TODO add your handling code here:listaclientes
+                String cliete_sel = (String)pag_actualizacion.listaclientes.getSelectedItem();
+                System.out.println("cliente_sel");
+                //obtener mediante la base de datos los siguientes elementos
+                String editdir = "nombre a editar";// obtener de db
+                String  fechaini = "fechainicialanterior";
+                String fechafin="fechafinanterior";
+                String placaant = "placa anterior";
+
+                // imprimir los valores en los text para que sean modificados
+
+                pag_actualizacion.jt_get_dir_nueva.setText(editdir);
+                pag_actualizacion.jt_get_fecha_nueva.setText(fechaini);
+                pag_actualizacion.jt_get_venc_nuevo.setText(fechafin);
+                pag_actualizacion.jt_get_placas_nuev.setText(placaant);
+                break;
+        
+        
+        }
+        
+    }                                
     
     
+    //funcion de vista para editar
+    
+    //funcion de actualizar para guardar datos
+    
+    
+private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+        
+        String nuevadir = pag_actualizacion.jt_get_dir_nueva.getText();
+        String nuevoinicio = pag_actualizacion.jt_get_fecha_nueva.getText();
+        String nuevofin =pag_actualizacion.jt_get_venc_nuevo.getText();
+        String placanueva = pag_actualizacion.jt_get_placas_nuev.getText();
+        
+        int ind  = pag_actualizacion.listaclientes.getSelectedIndex();
+        
+        this.modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva, ind);
+  
+        pag_actualizacion.dispose();
+    
+    
+}
     //main, no modificar
     
     /**
@@ -176,6 +249,8 @@ public class Controlador implements ActionListener{
             }
         });
     }
+
+    
 }
         
         
