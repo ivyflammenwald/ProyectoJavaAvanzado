@@ -126,7 +126,7 @@ public class Modelo {
     
     private void subirClientes(){
         try{
-            File clientes = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Clientes.xml");
+            File clientes = new File("/home/ivy/NetBeansProjects/Clientes.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -151,7 +151,7 @@ public class Modelo {
     
     private void subirFacturas(){
         try{
-            File facturas = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Facturas.xml");
+            File facturas = new File("/home/ivy/NetBeansProjects/Facturas.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -176,7 +176,7 @@ public class Modelo {
     
     private void subirVehiculos(){
         try {
-            File vehiculos = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Vehiculos.xml");
+            File vehiculos = new File("/home/ivy/NetBeansProjects/Vehiculos.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -247,9 +247,10 @@ public class Modelo {
         }
     }
    
-    public void consultarClientes(){
+    public ArrayList consultarClientes(){
         String query = "SELECT * FROM cliente;";
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -261,14 +262,18 @@ public class Modelo {
                 System.out.println("Nombre: " + rs.getString("nombre"));
                 System.out.println("Direccion: " + rs.getString("direccion"));
                 System.out.println();
+                String agregar = rs.getInt("id_cliente")+" "+ rs.getString("nombre")+" "+ rs.getString("direccion");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarFacturas(){
+    public ArrayList consultarFacturas(){
         String query = "SELECT * FROM factura;";
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -279,14 +284,18 @@ public class Modelo {
                 System.out.println("ID: " + rs.getInt("id_factura"));
                 System.out.println("Costo: " + rs.getDouble("monto"));
                 System.out.println();
+                String agregar = rs.getInt("id_factura")+" "+ rs.getDouble("monto");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarNPMC(){ // Consultar por (nombre_cliente, vehiculo_placas, vehiculo_modelo, factura_costo)
+    public ArrayList consultarNPMC(){ // Consultar por (nombre_cliente, vehiculo_placas, vehiculo_modelo, factura_costo)
         String query = "SELECT c.nombre, v.placas, v.modelo, f.monto FROM cliente c JOIN poliza ON c.id_cliente = poliza.id_cliente JOIN vehiculo v ON poliza.id_vehiculo = v.id_vehiculo JOIN factura f ON v.id_factura = f.id_factura;";
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -299,14 +308,18 @@ public class Modelo {
                 System.out.println("Modelo: " + rs.getString("modelo"));
                 System.out.println("Costo: " + rs.getDouble("monto"));
                 System.out.println();
+                String agregar = rs.getString("nombre")+" "+rs.getString("placas")+" "+ rs.getString("modelo")+" "+rs.getDouble("monto");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarNDP(int id_cliente){ // Consultar por (nombre_cliente, direccion_cliente, placas_vehiculo) de un cliente
+    public ArrayList consultarNDP(int id_cliente){ // Consultar por (nombre_cliente, direccion_cliente, placas_vehiculo) de un cliente
         String query = "SELECT c.nombre, c.direccion, v.placas FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + "; "; 
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try{
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -318,14 +331,18 @@ public class Modelo {
                 System.out.println("Direccion: " + rs.getString("direccion"));
                 System.out.println("Placas: " + rs.getString("placas"));
                 System.out.println();
+                String agregar = rs.getString("nombre")+" "+rs.getString("direccion")+" "+ rs.getString("placas");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarNPCP(int id_cliente){ // Consultar por (nombre_cliente, placas_vehiculo, monto_poliza, prima_poliza) de un cliente
+    public ArrayList consultarNPCP(int id_cliente){ // Consultar por (nombre_cliente, placas_vehiculo, monto_poliza, prima_poliza) de un cliente
         String query = "SELECT c.nombre, v.placas, p.costo, p.prima FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + ";"; 
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try{
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -338,14 +355,18 @@ public class Modelo {
                 System.out.println("Monto Poliza: " + rs.getString("monto"));
                 System.out.println("Prima asegurada: " + rs.getString("prima"));
                 System.out.println();
+                String agregar = rs.getString("nombre")+" "+rs.getString("placas")+" "+ rs.getString("monto")+" "+rs.getString("prima");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarFAFV(){ // Consultar por (fecha_apertura poliza, fecha_vencimiento poliza) de todas las polizas
+    public ArrayList consultarFAFV(){ // Consultar por (fecha_apertura poliza, fecha_vencimiento poliza) de todas las polizas
         String query = "SELECT p.fecha_apertura, p.fecha_vencimiento FROM poliza p;"; 
         ResultSet rs;
+        ArrayList <String> resultado = new ArrayList<String>();
         try{
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -356,28 +377,14 @@ public class Modelo {
                 System.out.println("Fecha apertura: " + rs.getDate("fecha_apertura"));
                 System.out.println("Fecha vencimiento: " + rs.getDate("fecha_vencimiento"));
                 System.out.println();
+                String agregar =  rs.getDate("fecha_apertura")+" "+ rs.getDate("fecha_vencimiento");
+                resultado.add(agregar);
             }
             rs.close();
         } catch (Exception e) {}
+        return resultado;
     }
     
-    public void consultarNPCMC(){ // Consultar por (nombre cliente, placas vehiculo, costo vehiculo, mayor_costo poliza) 
-        String query = "SELECT c.nombre, v.placas, f.monto, p.costo FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo JOIN factura f ON v.id_factura = f.id_factura WHERE p.costo = (SELECT MAX(costo) FROM poliza);"; 
-        ResultSet rs;
-        try{
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
-            rs = stmt.getResultSet();
-            System.out.println("Consulta exitosa: ");
-          
-            while(rs.next()){
-                System.out.println("Fecha apertura: " + rs.getDate("fecha_apertura"));
-                System.out.println("Fecha vencimiento: " + rs.getDate("fecha_vencimiento"));
-                System.out.println();
-            }
-            rs.close();
-        } catch (Exception e) {}
-    }
     
     public void actualizarDireccion(int id_cliente, String direccion){
         String query = "UPDATE cliente SET direccion = ? WHERE id_cliente = ?;";
@@ -466,5 +473,43 @@ public class Modelo {
             conn.close();
         } catch (Exception e) {}
     }
+    
+     public ArrayList llenarClientes(){ //
+        //esta funcion toma los clientes de las tablas sql y los inserta en la ultima lista de la  interfaz, con esa lista se selecciona para que clientes se desea hacer la consulta
+        String query = "SELECT nombre FROM cliente";
+        ArrayList <String> clientes_agregar = new ArrayList<String>();
+        
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("llenado con exito ");
+            
+            while(rs.next()){
+                String nomb = rs.getString("nombre");
+                clientes_agregar.add(nomb);
+            }
+            rs.close();
+        } catch (Exception e) {}
+        return clientes_agregar;
 }
+     
+     public void agregaraBaseDatos(String dir, String f1, String f2, String placa, int indice){ //AL MODELO O AL CONTROLADOR?
+        /*este metodo se invoca cuando se actualiza un usuario,  se usa para anexar los datos a la base de datos  en la consulta que se esta alterando  */
+        System.out.println(dir+f1+f2+placa); 
+              
+        
+            //actualizar direccion
+        String query = "UPDATE cliente SET direccion = ? WHERE id_cliente = ?";
+        try{
+            ps = conn.prepareStatement(query);
+            ps.setString(1,  dir);
+            ps.setInt(2, indice);
+            ps.executeUpdate();
+            System.out.println("Update exitoso...");
+        }catch(SQLException sqle){}catch(Exception e){
+            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
+}
+     }}
 

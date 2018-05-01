@@ -33,67 +33,31 @@ public class Vista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jl_listaclientes = new javax.swing.JComboBox<>();
-        jl_listavehiculos = new javax.swing.JComboBox<>();
-        jl_listafacturas = new javax.swing.JComboBox<>();
-        jl_listapolizas = new javax.swing.JComboBox<>();
-        jl_clientesabuscar = new javax.swing.JComboBox<>();
+        jl_listaconsultas_ind = new javax.swing.JComboBox<>();
         btn_editar_registro = new javax.swing.JToggleButton();
-        btn_consultar = new javax.swing.JButton();
-        lb_usuarios_select = new javax.swing.JLabel();
-        lb_polizas_select = new javax.swing.JLabel();
-        lb_facturas_select = new javax.swing.JLabel();
-        lb_vehiculos_select = new javax.swing.JLabel();
+        btn_consultar_indice = new javax.swing.JButton();
         lb_clientes_select = new javax.swing.JLabel();
         lb_proyectotitulo = new javax.swing.JLabel();
+        lb_clientes_select1 = new javax.swing.JLabel();
         lb_resultado_consultas = new javax.swing.JLabel();
         lb_mostrar_consultas = new javax.swing.JLabel();
+        jl_listaclientes = new javax.swing.JComboBox<>();
+        jl_listaconsultas = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
+        btn_consultar_todos = new javax.swing.JButton();
         lb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jl_listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jl_listaclientes.addActionListener(new java.awt.event.ActionListener() {
+        jl_listaconsultas_ind.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listaconsultas_ind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jl_listaclientesActionPerformed(evt);
+                jl_listaconsultas_indActionPerformed(evt);
             }
         });
-        jPanel1.add(jl_listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
-
-        jl_listavehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jl_listavehiculos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jl_listavehiculosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jl_listavehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
-
-        jl_listafacturas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jl_listafacturas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jl_listafacturasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jl_listafacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
-
-        jl_listapolizas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jl_listapolizas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jl_listapolizasActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jl_listapolizas, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, -1, -1));
-
-        jl_clientesabuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jl_clientesabuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jl_clientesabuscarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jl_clientesabuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        jPanel1.add(jl_listaconsultas_ind, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 500, 30));
 
         btn_editar_registro.setText("Editar registros");
         btn_editar_registro.addActionListener(new java.awt.event.ActionListener() {
@@ -101,47 +65,51 @@ public class Vista extends javax.swing.JFrame {
                 btn_editar_registroActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_editar_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
+        jPanel1.add(btn_editar_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, -1, -1));
 
-        btn_consultar.setText("Consultar");
-        btn_consultar.addActionListener(new java.awt.event.ActionListener() {
+        btn_consultar_indice.setText("Consultar por ind.");
+        btn_consultar_indice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_consultarActionPerformed(evt);
+                btn_consultar_indiceActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, -1, -1));
-
-        lb_usuarios_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_usuarios_select.setText("Usuarios a consultar");
-        jPanel1.add(lb_usuarios_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, 30));
-
-        lb_polizas_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_polizas_select.setText("Polizas");
-        jPanel1.add(lb_polizas_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, 30));
-
-        lb_facturas_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_facturas_select.setText("Facturas");
-        jPanel1.add(lb_facturas_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, 30));
-
-        lb_vehiculos_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_vehiculos_select.setText("Vehiculos");
-        jPanel1.add(lb_vehiculos_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, 30));
+        jPanel1.add(btn_consultar_indice, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, 30));
 
         lb_clientes_select.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
-        lb_clientes_select.setText("Clientes");
-        jPanel1.add(lb_clientes_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 30));
+        lb_clientes_select.setText("Consultas para clientes en especifico");
+        jPanel1.add(lb_clientes_select, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, 30));
 
         lb_proyectotitulo.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
         lb_proyectotitulo.setText("Proyecto Java avanzado");
         lb_proyectotitulo.setMaximumSize(new java.awt.Dimension(140, 20));
         lb_proyectotitulo.setMinimumSize(new java.awt.Dimension(140, 20));
         lb_proyectotitulo.setName(""); // NOI18N
-        jPanel1.add(lb_proyectotitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, 30));
+        jPanel1.add(lb_proyectotitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, 30));
+
+        lb_clientes_select1.setFont(new java.awt.Font("AnjaliOldLipi", 1, 18)); // NOI18N
+        lb_clientes_select1.setText("Consultas para todos los clientes ");
+        jPanel1.add(lb_clientes_select1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, 30));
 
         lb_resultado_consultas.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         lb_resultado_consultas.setText("Resultado de consultas");
         jPanel1.add(lb_resultado_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
         jPanel1.add(lb_mostrar_consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 247, 580, 170));
+
+        jl_listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listaclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jl_listaclientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jl_listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 190, 30));
+
+        jl_listaconsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jl_listaconsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jl_listaconsultasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jl_listaconsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 590, 30));
 
         jPanel2.setBackground(new java.awt.Color(229, 191, 244));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(49, 45, 71)));
@@ -160,6 +128,14 @@ public class Vista extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 590, 180));
 
+        btn_consultar_todos.setText("Consultar");
+        btn_consultar_todos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultar_todosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_consultar_todos, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
+
         lb_fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/fondomorado_1.jpg"))); // NOI18N
         jPanel1.add(lb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 470));
 
@@ -177,34 +153,30 @@ public class Vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void jl_listaclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listaclientesActionPerformed
+    private void jl_listaconsultas_indActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listaconsultas_indActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jl_listaclientesActionPerformed
-
-    private void jl_listapolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listapolizasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jl_listapolizasActionPerformed
-
-    private void jl_listavehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listavehiculosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jl_listavehiculosActionPerformed
-
-    private void jl_listafacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listafacturasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jl_listafacturasActionPerformed
-
-    private void jl_clientesabuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_clientesabuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jl_clientesabuscarActionPerformed
+    }//GEN-LAST:event_jl_listaconsultas_indActionPerformed
 
     private void btn_editar_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editar_registroActionPerformed
         // TODO add your handling code here:
       
     }//GEN-LAST:event_btn_editar_registroActionPerformed
 
-    private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+    private void btn_consultar_indiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultar_indiceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_consultarActionPerformed
+    }//GEN-LAST:event_btn_consultar_indiceActionPerformed
+
+    private void jl_listaclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listaclientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jl_listaclientesActionPerformed
+
+    private void jl_listaconsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jl_listaconsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jl_listaconsultasActionPerformed
+
+    private void btn_consultar_todosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultar_todosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_consultar_todosActionPerformed
 
     
     
@@ -256,24 +228,20 @@ public class Vista extends javax.swing.JFrame {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btn_consultar;
+    public javax.swing.JButton btn_consultar_indice;
+    public javax.swing.JButton btn_consultar_todos;
     public javax.swing.JToggleButton btn_editar_registro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    public javax.swing.JComboBox<String> jl_clientesabuscar;
     public javax.swing.JComboBox<String> jl_listaclientes;
-    public javax.swing.JComboBox<String> jl_listafacturas;
-    public javax.swing.JComboBox<String> jl_listapolizas;
-    public javax.swing.JComboBox<String> jl_listavehiculos;
+    public javax.swing.JComboBox<String> jl_listaconsultas;
+    public javax.swing.JComboBox<String> jl_listaconsultas_ind;
     public javax.swing.JLabel lb_clientes_select;
-    public javax.swing.JLabel lb_facturas_select;
+    public javax.swing.JLabel lb_clientes_select1;
     public javax.swing.JLabel lb_fondo;
     public javax.swing.JLabel lb_mostrar_consultas;
-    public javax.swing.JLabel lb_polizas_select;
     public javax.swing.JLabel lb_proyectotitulo;
     public javax.swing.JLabel lb_resultado_consultas;
-    public javax.swing.JLabel lb_usuarios_select;
-    public javax.swing.JLabel lb_vehiculos_select;
     // End of variables declaration//GEN-END:variables
 }
 

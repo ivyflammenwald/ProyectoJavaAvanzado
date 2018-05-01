@@ -57,10 +57,10 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
         lb_cliente.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
         lb_cliente.setText("Cliente a editar");
-        jPanel1.add(lb_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
+        jPanel1.add(lb_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 30));
 
         listaclientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 160, -1));
+        jPanel1.add(listaclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 160, -1));
 
         btn_seleccionar.setText("Seleccionar");
         btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +112,7 @@ public class PaginaActualizacion extends javax.swing.JFrame {
 
         lb_titulo_act.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
         lb_titulo_act.setText("Actualización de registros");
-        jPanel1.add(lb_titulo_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+        jPanel1.add(lb_titulo_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
         lb_fechainic.setFont(new java.awt.Font("WenQuanYi Micro Hei Mono", 1, 14)); // NOI18N
         lb_fechainic.setText("Fecha de inicio");

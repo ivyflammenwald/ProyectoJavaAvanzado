@@ -31,11 +31,14 @@ public class Controlador implements ActionListener{
     //definicion de los metodos de la vista
     
     
-    this.vista.btn_consultar.addActionListener(this);
-    this.vista.btn_consultar.setActionCommand("btn_vista_consult");
+    this.vista.btn_consultar_indice.addActionListener(this);
+    this.vista.btn_consultar_indice.setActionCommand("btn_vista_consult_ind");
     
     this.vista.btn_editar_registro.addActionListener(this);
     this.vista.btn_editar_registro.setActionCommand("btn_vista_editar");
+    
+    this.vista.btn_consultar_todos.addActionListener(this);
+    this.vista.btn_consultar_todos.setActionCommand("btn_vista_consult_todo");
     
     this.pag_actualizacion.btn_borrar.addActionListener(this);
     this.pag_actualizacion.btn_borrar.setActionCommand("btn_pag_act");
@@ -50,6 +53,7 @@ public class Controlador implements ActionListener{
     
     private void iniciarpagina(){ // al controlador
         pag_actualizacion.listaclientes.removeAllItems();
+        
         ArrayList <String> agregaralista = modelo.llenarClientes();
         for( String cli : agregaralista){
         pag_actualizacion.listaclientes.addItem(cli);
@@ -63,39 +67,24 @@ public class Controlador implements ActionListener{
     
     private void iniciarvista(){ //incia los elementos de la vista, es llamado en el constructor
         
-        vista.jl_listaclientes.removeAllItems();
-        vista.jl_listafacturas.removeAllItems();
-        vista.jl_listapolizas.removeAllItems();
-        vista.jl_clientesabuscar.removeAllItems();
-        vista.jl_listavehiculos.removeAllItems();
-      
-        vista.jl_listaclientes.addItem("-Todo-");
-        vista.jl_listaclientes.addItem("nombre");
-        vista.jl_listaclientes.addItem("dirección");
-
-        vista.jl_listafacturas.addItem("monto");
+        vista.jl_listaconsultas.removeAllItems();
+        vista.jl_listaconsultas.addItem("todos los clientes");
+        vista.jl_listaconsultas.addItem("todas las facturas");
+        vista.jl_listaconsultas.addItem("nombre, placas, modelo y costo");
+        vista.jl_listaconsultas.addItem("fechas de todas las polizas ");
         
-        vista.jl_listapolizas.addItem("-Todo-");
-        vista.jl_listapolizas.addItem("costo");
-        vista.jl_listapolizas.addItem("prima");
-        vista.jl_listapolizas.addItem("apertura");
-        vista.jl_listapolizas.addItem("vencimiento");
-       
-        vista.jl_listavehiculos.addItem("-Todo-");
-        vista.jl_listavehiculos.addItem("placas");
-        vista.jl_listavehiculos.addItem("marca");
-        vista.jl_listavehiculos.addItem("modelo");
+        vista.jl_listaconsultas_ind.removeAllItems();
+        vista.jl_listaconsultas_ind.addItem("nombre, direccion, placas");
+         vista.jl_listaconsultas_ind.addItem("nombre, placas, monto, prima");
         
-        vista.jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
         
        ArrayList <String> llenado;
         llenado = modelo.llenarClientes();
        
         
         for( String agregar : llenado){
-            vista.jl_clientesabuscar.addItem(agregar);
+            vista.jl_listaconsultas.addItem(agregar);
         }
-
        
 }
 
@@ -104,57 +93,101 @@ public class Controlador implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
          
-        
+        String set_result ="";
+                
+                
         switch (e.getActionCommand()){
         
-            case "btn_vista_consult":
+            case "btn_vista_consult_ind": //consultar elemento por indice
                 
-                String atrib_cliente = (String)vista.jl_listaclientes.getSelectedItem();
-        String atrib_vehic = (String)vista.jl_listavehiculos.getSelectedItem();
-        String atrib_poliza = (String)vista.jl_listapolizas.getSelectedItem();
-        String atrib_factura = (String)vista.jl_listafacturas.getSelectedItem();
-        
-        int cli_abuscar = vista.jl_listaclientes.getSelectedIndex();
-        
-        //modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
-        ArrayList <String> parametros_consulta = new ArrayList<String>();
-        parametros_consulta.add(atrib_cliente);
-        parametros_consulta.add(atrib_vehic);
-        parametros_consulta.add(atrib_factura);
-        parametros_consulta.add(atrib_poliza);
-        String consulta_hecha=""; //va a almacenar todo en un solo parrafo
-        
-        ArrayList <String> consultas_imprimir;
-        
-        consultas_imprimir = modelo.hacerConsulta(parametros_consulta, cli_abuscar);
-       
-        
-        for (String tupla : consultas_imprimir){
-            consulta_hecha+=tupla;
-            consulta_hecha+="\n";
-        }
-        
-        
-                System.out.println(consulta_hecha);
-        vista.lb_mostrar_consultas.setText(consulta_hecha);
+                int opcion1 = vista.jl_listaconsultas_ind.getSelectedIndex();
+                int ind_cliente = vista.jl_listaclientes.getSelectedIndex();
+                
+                switch(opcion1){
+                
+                    case 0: // nombre dir placas
+                   
+                        ArrayList<String > ci_ndp = modelo.consultarNDP(ind_cliente);
+                        
+                        for(String s : ci_ndp){
+                            set_result = set_result+" "+s+"\n"; //inserta el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result);
+                        
+                       break;
+                       
+                    case 1: //nombre placas monto prima
+                        
+                        ArrayList<String > ci_npmp = modelo.consultarNPCP(ind_cliente);
+                        
+                        for(String s : ci_npmp){
+                            set_result = set_result+" "+s+"\n"; //concatena el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result); //lo imprime en la interfaz
+                        
+                        break;
+                
+                }
                 
                 break;
                 
              case "btn_vista_editar":
-                 
                  pag_actualizacion.setVisible(true);
-                
                 break;
                 
-            case "btn_pag_act":
-                 int indice = pag_actualizacion.listaclientes.getSelectedIndex();
-                  System.out.println("borrado cliente "+pag_actualizacion.listaclientes.getSelectedItem()+"indice "+indice); 
-                  pag_actualizacion.listaclientes.remove(indice);
+            case "btn_vista_consult_todo":
+                int opcion2 = vista.jl_listaconsultas_ind.getSelectedIndex();
+                
+                switch(opcion2){
+                
+                    case 0: // todos los clientes
+                        ArrayList<String > c_cli = modelo.consultarClientes();
+                        
+                        for(String s : c_cli){
+                            set_result = set_result+" "+s+"\n"; //inserta el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result);
+                        
+                       break;
+                       
+                    case 1: //todas las facturas
+                        
+                        ArrayList<String > c_fac = modelo.consultarFacturas();
+                        
+                        for(String s : c_fac){
+                            set_result = set_result+" "+s+"\n"; //concatena el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result); //lo imprime en la interfaz
+                        
+                        break;
+                        
+                    case 2: // nombre placas modelo y costo
+                        ArrayList<String > c_npmc = modelo.consultarNPMC();
+                        
+                        for(String s : c_npmc){
+                            set_result = set_result+" "+s+"\n"; //inserta el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result);
+                        
+                       break;
+                       
+                    case 3: // fechas 
+                        
+                        ArrayList<String > c_ff = modelo.consultarFAFV();
+                        
+                        for(String s : c_ff){
+                            set_result = set_result+" "+s+"\n"; //concatena el string y hace un salto de linea
+                        }
+                        vista.lb_mostrar_consultas.setText(set_result); //lo imprime en la interfaz
+                        
+                        break;
+                     
+                }
                 
                 break;
                 
              case "btn_pag_guardar":
-                 String nuevadir = pag_actualizacion.jt_get_dir_nueva.getText();
+                        String nuevadir = pag_actualizacion.jt_get_dir_nueva.getText();
                   String nuevoinicio = pag_actualizacion.jt_get_fecha_nueva.getText();
                     String nuevofin =pag_actualizacion.jt_get_venc_nuevo.getText();
                     String placanueva = pag_actualizacion.jt_get_placas_nuev.getText();
@@ -167,6 +200,17 @@ public class Controlador implements ActionListener{
                 
                 break;
                 
+                
+             case "btn_pag_act":
+                  int indice = pag_actualizacion.listaclientes.getSelectedIndex();
+                  System.out.println("borrado cliente "+pag_actualizacion.listaclientes.getSelectedItem()+"indice "+indice); 
+                  pag_actualizacion.listaclientes.remove(indice);
+
+                 break;
+                
+                 
+                 
+                 
             case "btn_pag_select":
                         // TODO add your handling code here:listaclientes
                 String cliete_sel = (String)pag_actualizacion.listaclientes.getSelectedItem();
@@ -196,22 +240,7 @@ public class Controlador implements ActionListener{
     //funcion de actualizar para guardar datos
     
     
-private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-        
-        String nuevadir = pag_actualizacion.jt_get_dir_nueva.getText();
-        String nuevoinicio = pag_actualizacion.jt_get_fecha_nueva.getText();
-        String nuevofin =pag_actualizacion.jt_get_venc_nuevo.getText();
-        String placanueva = pag_actualizacion.jt_get_placas_nuev.getText();
-        
-        int ind  = pag_actualizacion.listaclientes.getSelectedIndex();
-        
-        this.modelo.agregaraBaseDatos(nuevadir,nuevoinicio,nuevofin,placanueva, ind);
-  
-        pag_actualizacion.dispose();
-    
-    
-}
+
     //main, no modificar
     
     /**
