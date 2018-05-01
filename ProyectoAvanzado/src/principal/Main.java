@@ -16,13 +16,15 @@ import vista.Vista;
 public class Main {
     public static void main(String[] args) {
         Modelo model = new Modelo();
-        Vista view = new Vista();
-        PaginaActualizacion pag= new PaginaActualizacion();
+        //Vista view = new Vista();
+        //PaginaActualizacion pag= new PaginaActualizacion();
         
-        Controlador cntr = new Controlador(view,model,pag );
+        //Controlador cntr = new Controlador(view,model,pag );
         
-        model.subirXML();
-        model.consultarClientes();
-        model.consultarFacturas();
+        //model.subirXML();
+        //model.consultarClientes();
+        //model.consultarFacturas();
+        model.actualizarDireccion(1, "Prolongacion Ocote No. 48");
+        model.terminarConexion();
     }
 }

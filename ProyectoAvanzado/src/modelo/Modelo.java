@@ -33,7 +33,7 @@ public class Modelo {
      */
     public Modelo(){
         Conexion.cargar();
-        conn =  Conexion.conectar("jdbc:mysql://localhost:3306/proyectojava","root","29thd03");
+        conn =  Conexion.conectar("jdbc:mysql://localhost:3306/proyectojava","root","");
     }
     
     /**
@@ -126,7 +126,7 @@ public class Modelo {
     
     private void subirClientes(){
         try{
-            File clientes = new File("/home/ivy/NetBeansProjects/Clientes.xml");
+            File clientes = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Clientes.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -151,7 +151,7 @@ public class Modelo {
     
     private void subirFacturas(){
         try{
-            File facturas = new File("/home/ivy/NetBeansProjects/Facturas.xml");
+            File facturas = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Facturas.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -176,7 +176,7 @@ public class Modelo {
     
     private void subirVehiculos(){
         try {
-            File vehiculos = new File("/home/ivy/NetBeansProjects/Vehiculos.xml");
+            File vehiculos = new File("/home/emanuel/Documentos/Java/JavaAvanzado/Vehiculos.xml");
             
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
@@ -246,273 +246,9 @@ public class Modelo {
             
         }
     }
-    
-    ////////////////ivy metodos para actualizar
-    
-    public void agregaraBaseDatos(String dir, String f1, String f2, String placa, int indice){ //AL MODELO O AL CONTROLADOR?
-        /*este metodo se invoca cuando se actualiza un usuario,  se usa para anexar los datos a la base de datos  en la consulta que se esta alterando  */
-        System.out.println(dir+f1+f2+placa); 
-              
-        
-            //actualizar direccion
-        String query = "UPDATE cliente SET direccion = ? WHERE id_cliente = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setString(1,  dir);
-            ps.setInt(2, indice);
-            ps.executeUpdate();
-            System.out.println("Update exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-        
-        //actualizar fecha inicio
-        
-        query = "UPDATE poliza SET apertura = ? WHERE id_poliza  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setString(1,  f1);
-            ps.setInt(2, indice);
-            ps.executeUpdate();
-            System.out.println("Update exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-       
-       //actualizar fecha fin
-       
-        query = "UPDATE poliza SET vencimiento = ? WHERE id_poliza  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setString(1,  f2);
-            ps.setInt(2, indice);
-            ps.executeUpdate();
-            System.out.println("Update exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-        
-        //  actualizar placa
-        
-        query = "UPDATE vehiculo SET placas = ? WHERE id_vehiculo  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setString(1,  placa);
-            ps.setInt(2, indice);
-            ps.executeUpdate();
-            System.out.println("Update exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-    }
-    
-    public void borrarenBaseDatos(int indice){
-        
-        //borrar de cliente
-        String query = "DELETE FROM cliente WHERE id_cliente  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, indice);
-            ps.executeUpdate();
-            System.out.println("Delete exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-        
-        //borrar de  vehiculo
-        query = "DELETE FROM vehiculo WHERE id_vehiculo  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, indice);
-            ps.executeUpdate();
-            System.out.println("Delete exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-        
-        //borrar de poliza
-        query = "DELETE FROM poliza WHERE id_poliza  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, indice);
-            ps.executeUpdate();
-            System.out.println("Delete exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-       
-        //borrar de factura
-       
-        query = "DELETE FROM factura WHERE id_factura  = ?";
-        try{
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, indice);
-            ps.executeUpdate();
-            System.out.println("Delete exitoso...");
-        }catch(SQLException sqle){}catch(Exception e){
-            System.out.println("ha ocurrido una excepcion, los cambios no se guardaran ");  
-        }
-    }
-    
-    // metodos para la vista
-    
-    
-    public String[][] hacerConsulta(String cli, String veh, String fac, String po, int cliabuscar, int indmax){
-    
-        // se va a definir que variables se buscan 
-        // en el arraylist vienen  los string con el nombre de los atributos que se va a buscar en las tablas
-        // con este array se van a hacer las consultas, pero como no existe una columna todos, se cambia por * para que
-        //sea una consulta valida
-        
-        String [][] resultados = new String[indmax][] ;
-        
-        String querycli = "SELECT "+cli+", FROM cliente WHERE id_cliente ="+cliabuscar+";"; //definir consulta cliente
-        
-        String queryveh = "SELECT "+veh+" FROM vehiculo WHERE id_vehiculo ="+cliabuscar+";"; //definir consulta
-        
-        String queryfac="SELECT "+fac+" FROM factura WHERE id_factura ="+cliabuscar+";";
-                
-        String querypo="SELECT "+po+" FROM poliza WHERE id_poliza ="+cliabuscar+";";
-        
-        
-         String datoscliente ="";
-            String datosvehic="";
-            String datosfact="";
-            String datospoliza="";
-        
-        //TRY CATCH PARA CADA CONSULTA
-        
-        //cliente
-        
-        ResultSet rs;
-        
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(querycli);
-            rs = stmt.getResultSet();
-            System.out.println("Consulta exitosa: cliente ");
-            int i =0;
-            
-            while(rs.next()){
-                if(cli.equals("*")){ //si es select * de cliente
-                    String datosclientenom = rs.getString("nombre");
-                    String datosclientedir=rs.getString("direccion");
-                    datoscliente= datosclientenom+" "+datosclientedir;
-                }else{
-                    datoscliente = rs.getString(cli); //el parametro es el que se haya pedido
-                }
-                resultados[i][0]=datoscliente;
-                datoscliente="";
-                i++;
-            }
-            rs.close();
-        } catch (SQLException e) {}
-
-        
-        //vehiculo
-        
-        ResultSet rsv;
-        
-       try {
-            stmt = conn.createStatement();
-            rsv = stmt.executeQuery(queryveh);
-            rsv = stmt.getResultSet();
-            System.out.println("Consulta exitosa: cliente ");
-            int i =0;
-            
-            while(rsv.next()){
-               if(veh.equals("*")){ //si es select * de vehiculos  
-                    String datosvehicpl = rsv.getString("placas");
-                    String datosvehicma =rsv.getString("marca");
-                    String datosvehicmo =rsv.getString("modelo");
-                    datosvehic+=datosvehicpl+" "+datosvehicma+" "+datosvehicmo;
-                    
-                }else{ 
-                    datosvehic = rsv.getString(veh); //el parametro es el que se haya pedido
-               }
-                resultados[i][1]=datosvehic;
-                datosvehic="";
-                i++;
-            }
-            rsv.close();
-        } catch (SQLException e) {}
-       
-        //factura
-        ResultSet rsf;
-        
-       try {
-            stmt = conn.createStatement();
-            rsf = stmt.executeQuery(queryveh);
-            rsf = stmt.getResultSet();
-            System.out.println("Consulta exitosa: cliente ");
-            int i =0;
-            
-            while(rsf.next()){
-                datosfact = rsf.getString(fac); //el parametro es el que se haya pedido
-                resultados[i][2]=datosfact;
-                datosfact="";
-                i++;
-            }
-            rsf.close();
-        } catch (SQLException e) {}
-        
-        //poliza
-        
-        ResultSet rsp;
-        
-       try {
-            stmt = conn.createStatement();
-            rsp = stmt.executeQuery(queryveh);
-            rsp = stmt.getResultSet();
-            System.out.println("Consulta exitosa: cliente ");
-            int i =0;
-            
-            while(rsp.next()){
-                if(po.equals("*")){ //si es select * de poliza 
-                    
-                    String datospolizaco = rsp.getString("costo");
-                    String datospolizapr =rsp.getString("prima");
-                    String datospolizaap =rsp.getString("apertura");
-                    datospoliza=datospolizaco+" "+datospolizapr+" "+datospolizaap; 
-                    
-                }else{
-                    datospoliza = rsp.getString(po); //el parametro es el que se haya pedido
-                }
-                resultados[i][3]=datospoliza;
-                datospoliza="";
-                i++;
-            }
-            rsp.close();
-        } catch (SQLException e) {}
-       
-        return resultados;
-    }
-  
-    
-    public ArrayList llenarClientes(){ //EMANUEL hay que definir este metodo
-        //esta funcion toma los clientes de las tablas sql y los inserta en la ultima lista de la  interfaz, con esa lista se selecciona para que clientes se desea hacer la consulta
-        String query = "SELECT nombre FROM cliente";
-        ArrayList <String> clientes_agregar = new ArrayList<String>();
-        
-        ResultSet rs;
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
-            rs = stmt.getResultSet();
-            System.out.println("llenado con exito ");
-            
-            while(rs.next()){
-                String nomb = rs.getString("nombre");
-                clientes_agregar.add(nomb);
-            }
-            rs.close();
-        } catch (Exception e) {}
-        return clientes_agregar;
-    }
-    
-    
+   
     public void consultarClientes(){
-        String query = "SELECT * FROM cliente";
+        String query = "SELECT * FROM cliente;";
         ResultSet rs;
         try {
             stmt = conn.createStatement();
@@ -531,7 +267,7 @@ public class Modelo {
     }
     
     public void consultarFacturas(){
-        String query = "SELECT * FROM factura";
+        String query = "SELECT * FROM factura;";
         ResultSet rs;
         try {
             stmt = conn.createStatement();
@@ -588,7 +324,7 @@ public class Modelo {
     }
     
     public void consultarNPCP(int id_cliente){ // Consultar por (nombre_cliente, placas_vehiculo, monto_poliza, prima_poliza) de un cliente
-        String query = "SELECT c.nombre, v.placas, p.monto, p.prima FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + ";"; 
+        String query = "SELECT c.nombre, v.placas, p.costo, p.prima FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + ";"; 
         ResultSet rs;
         try{
             stmt = conn.createStatement();
@@ -622,6 +358,112 @@ public class Modelo {
                 System.out.println();
             }
             rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarNPCMC(){ // Consultar por (nombre cliente, placas vehiculo, costo vehiculo, mayor_costo poliza) 
+        String query = "SELECT c.nombre, v.placas, f.monto, p.costo FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo JOIN factura f ON v.id_factura = f.id_factura WHERE p.costo = (SELECT MAX(costo) FROM poliza);"; 
+        ResultSet rs;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+          
+            while(rs.next()){
+                System.out.println("Fecha apertura: " + rs.getDate("fecha_apertura"));
+                System.out.println("Fecha vencimiento: " + rs.getDate("fecha_vencimiento"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void actualizarDireccion(int id_cliente, String direccion){
+        String query = "UPDATE cliente SET direccion = ? WHERE id_cliente = ?;";
+        
+        try {
+            ps = conn.prepareCall(query);
+            ps.setString(1, direccion);
+            ps.setInt(2, id_cliente);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
+        } catch (Exception e) {}
+    }
+    
+    public void actualizarModeloMarca(int id_vehiculo, String modelo, String marca){
+        String query = "UPDATE vehiculo SET  modelo = ?, marca = ? WHERE id_vehiculo = ?;";
+        
+        try {
+            ps = conn.prepareCall(query);
+            ps.setString(1, modelo);
+            ps.setString(2, marca);
+            ps.setInt(3, id_vehiculo);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
+        } catch (Exception e) {}
+    }
+    
+    public void actualizarModelo(int id_vehiculo, String modelo){
+        String query = "UPDATE vehiculo SET  modelo = ? WHERE id_vehiculo = ?;";
+        
+        try {
+            ps = conn.prepareCall(query);
+            ps.setString(1, modelo);
+            ps.setInt(2, id_vehiculo);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
+        } catch (Exception e) {}
+    }
+    
+    public void actualizarMarca(int id_vehiculo, String marca){
+        String query = "UPDATE vehiculo SET marca = ? WHERE id_vehiculo = ?;";
+        
+        try {
+            ps = conn.prepareCall(query);
+            ps.setString(1, marca);
+            ps.setInt(2, id_vehiculo);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
+        } catch (Exception e) {}
+    }
+    
+    public void actualizarFactura(int id_factura, double monto){
+        String query = "UPDATE factura SET monto = ? WHERE id_factura = ?;";
+        
+        try {
+            ps = conn.prepareCall(query);
+            ps.setDouble(1, monto);
+            ps.setInt(2, id_factura);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
+            actualizarPoliza(id_factura, monto);
+        } catch (Exception e) {}
+    }
+    
+    private void actualizarPoliza(int id, double monto){
+        String query = "UPDATE costo SET costo = ?, prima = ? WHERE id_poliza = ?;";
+        double costo = monto * ((6.67/12)/100);
+        double prima = monto * 0.85;
+        try {
+            ps = conn.prepareCall(query);
+            ps.setDouble(1, costo);
+            ps.setDouble(2, prima);
+            ps.setInt(3, id);
+            int renglones_afectados = ps.executeUpdate();
+            System.out.println("Número de renglones actualizados: " + renglones_afectados);
+            ps.close();
+            conn.close();
         } catch (Exception e) {}
     }
 }
