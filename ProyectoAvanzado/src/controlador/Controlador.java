@@ -26,7 +26,7 @@ public class Controlador implements ActionListener{
     this.pag_actualizacion =pag;
     this.iniciarvista();
     this.iniciarpagina();
-    
+    vista.setVisible(true);
     
     //definicion de los metodos de la vista
     
@@ -70,21 +70,21 @@ public class Controlador implements ActionListener{
         vista.jl_listavehiculos.removeAllItems();
       
         vista.jl_listaclientes.addItem("-Todo-");
-        vista.jl_listaclientes.addItem("Nombre");
-        vista.jl_listaclientes.addItem("Dirección");
+        vista.jl_listaclientes.addItem("nombre");
+        vista.jl_listaclientes.addItem("dirección");
 
-        vista.jl_listafacturas.addItem("Monto");
+        vista.jl_listafacturas.addItem("monto");
         
         vista.jl_listapolizas.addItem("-Todo-");
-        vista.jl_listapolizas.addItem("Costo");
-        vista.jl_listapolizas.addItem("Prima");
-        vista.jl_listapolizas.addItem("Apertura");
-        vista.jl_listapolizas.addItem("Vencimiento");
+        vista.jl_listapolizas.addItem("costo");
+        vista.jl_listapolizas.addItem("prima");
+        vista.jl_listapolizas.addItem("apertura");
+        vista.jl_listapolizas.addItem("vencimiento");
        
         vista.jl_listavehiculos.addItem("-Todo-");
-        vista.jl_listavehiculos.addItem("Placas");
-        vista.jl_listavehiculos.addItem("Marca");
-        vista.jl_listavehiculos.addItem("Modelo");
+        vista.jl_listavehiculos.addItem("placas");
+        vista.jl_listavehiculos.addItem("marca");
+        vista.jl_listavehiculos.addItem("modelo");
         
         vista.jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
         
@@ -116,7 +116,7 @@ public class Controlador implements ActionListener{
         
         int cli_abuscar = vista.jl_listaclientes.getSelectedIndex();
         
-        //Modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
+        //modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
         ArrayList <String> parametros_consulta = new ArrayList<String>();
         parametros_consulta.add(atrib_cliente);
         parametros_consulta.add(atrib_vehic);
@@ -135,7 +135,7 @@ public class Controlador implements ActionListener{
         }
         
         
-        
+                System.out.println(consulta_hecha);
         vista.lb_mostrar_consultas.setText(consulta_hecha);
                 
                 break;

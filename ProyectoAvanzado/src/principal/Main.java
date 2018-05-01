@@ -22,5 +22,7 @@ public class Main {
         Controlador cntr = new Controlador(view,model,pag );
         
         model.subirXML();
+        model.consultarClientes();
+        model.consultarFacturas();
     }
 }

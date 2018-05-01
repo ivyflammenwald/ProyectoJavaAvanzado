@@ -357,7 +357,7 @@ public class Modelo {
     // metodos para la vista
     
     
-    public ArrayList hacerConsulta(ArrayList<String> parametros, int cliabuscar){
+    public ArrayList<String> hacerConsulta(ArrayList<String> parametros, int cliabuscar){
     
         // se va a definir que variables se buscan 
         // en el arraylist vienen  los string con el nombre de los atributos que se va a buscar en las tablas
@@ -366,27 +366,39 @@ public class Modelo {
         
         ArrayList<String> resultados = new ArrayList <String>();
         
-        for (String s :parametros){
-            if(s.equals("-todos-")){ // si tiene un valor distinto a uno utilizable
+        for (String s : parametros){
+            if(s.equals("-Todo-")){ // si tiene un valor distinto a uno utilizable
                 s ="*";
             }
+            System.out.println(s);
+            
         }
         
         
-        String query = "SELECT poliza.? , vehiculo.? , factura.?, poliza.? FROM poliza INNER JOIN cliente ON cliente.id_cliente = poliza.id_cliente"
-                + "INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
-                + "INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
-                + "  WHERE id cliente = ?"; //definir consulta
+        String query = "SELECT cliente.? , vehiculo.? , factura.?, poliza.? FROM cliente INNER JOIN poliza ON cliente.id_cliente = poliza.id_cliente"
+                + " INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
+                + " INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
+                + "  WHERE id_cliente = ?;"; //definir consulta
+        
+        String query2 = "SELECT cliente."+parametros.get(0)+", vehiculo."+parametros.get(1)+" , factura."+parametros.get(2)+", poliza."+parametros.get(3)+" FROM cliente INNER JOIN poliza ON cliente.id_cliente = poliza.id_cliente"
+                + " INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
+                + " INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
+                + "  WHERE id_cliente ="+cliabuscar+";"; //definir consulta
         
         ResultSet rs; 
+        System.out.println(query2);
+        System.out.println(query);
         
         try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query2);
+            rs = stmt.getResultSet();
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, parametros.get(1));  // atrib de clientes
-            ps.setString(2, parametros.get(2)); //atrib de vehiculo
-            ps.setString(3, parametros.get(3)); //atrib de factura
-            ps.setString(4, parametros.get(4)); //atrib de poliza
+            ps.setString(1, parametros.get(0));  // atrib de clientes
+            ps.setString(2, parametros.get(1)); //atrib de vehiculo
+            ps.setString(3, parametros.get(2)); //atrib de factura
+            ps.setString(4, parametros.get(3)); //atrib de poliza
             
             if(cliabuscar == 1){ //si seleccionaron todos los clientes
                 ps.setString(5, "*");
@@ -394,10 +406,13 @@ public class Modelo {
                 ps.setInt(5, cliabuscar);
             }
            
-            rs = ps.executeQuery(query);
-            rs = ps.getResultSet();
-            System.out.println("Consulta exitosa: ");
+            System.out.println(ps);
             
+            //rs = ps.executeQuery(query);
+            //rs = ps.getResultSet();
+            
+            System.out.println("Consulta exitosa: ");
+            System.out.println(rs);
             
             String tuplaconsulta="";
             
@@ -483,6 +498,120 @@ public class Modelo {
             rs.close();
         } catch (Exception e) {}
         return clientes_agregar;
+    }
+    
+    public void consultarClientes(){
+        String query = "SELECT * FROM cliente";
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                System.out.println("ID: " + rs.getInt("id_cliente"));
+                System.out.println("Nombre: " + rs.getString("nombre"));
+                System.out.println("Direccion: " + rs.getString("direccion"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarFacturas(){
+        String query = "SELECT * FROM factura";
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                System.out.println("ID: " + rs.getInt("id_factura"));
+                System.out.println("Costo: " + rs.getDouble("monto"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarNPMC(){ // Consultar por (nombre_cliente, vehiculo_placas, vehiculo_modelo, factura_costo)
+        String query = "SELECT c.nombre, v.placas, v.modelo, f.monto FROM cliente c JOIN poliza ON c.id_cliente = poliza.id_cliente JOIN vehiculo v ON poliza.id_vehiculo = v.id_vehiculo JOIN factura f ON v.id_factura = f.id_factura;";
+        ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                System.out.println("Nombre: " + rs.getString("nombre"));
+                System.out.println("Placas: " + rs.getString("placas"));
+                System.out.println("Modelo: " + rs.getString("modelo"));
+                System.out.println("Costo: " + rs.getDouble("monto"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarNDP(int id_cliente){ // Consultar por (nombre_cliente, direccion_cliente, placas_vehiculo) de un cliente
+        String query = "SELECT c.nombre, c.direccion, v.placas FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + "; "; 
+        ResultSet rs;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                System.out.println("Nombre: " + rs.getString("nombre"));
+                System.out.println("Direccion: " + rs.getString("direccion"));
+                System.out.println("Placas: " + rs.getString("placas"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarNPCP(int id_cliente){ // Consultar por (nombre_cliente, placas_vehiculo, monto_poliza, prima_poliza) de un cliente
+        String query = "SELECT c.nombre, v.placas, p.monto, p.prima FROM cliente c JOIN poliza p ON c.id_cliente = p.id_cliente JOIN vehiculo v ON p.id_vehiculo = v.id_vehiculo WHERE c.id_cliente = " + Integer.toString(id_cliente) + ";"; 
+        ResultSet rs;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                System.out.println("Nombre: " + rs.getString("nombre"));
+                System.out.println("Placas: " + rs.getString("placas"));
+                System.out.println("Monto Poliza: " + rs.getString("monto"));
+                System.out.println("Prima asegurada: " + rs.getString("prima"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
+    }
+    
+    public void consultarFAFV(){ // Consultar por (fecha_apertura poliza, fecha_vencimiento poliza) de todas las polizas
+        String query = "SELECT p.fecha_apertura, p.fecha_vencimiento FROM poliza p;"; 
+        ResultSet rs;
+        try{
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+          
+            while(rs.next()){
+                System.out.println("Fecha apertura: " + rs.getDate("fecha_apertura"));
+                System.out.println("Fecha vencimiento: " + rs.getDate("fecha_vencimiento"));
+                System.out.println();
+            }
+            rs.close();
+        } catch (Exception e) {}
     }
 }
 
