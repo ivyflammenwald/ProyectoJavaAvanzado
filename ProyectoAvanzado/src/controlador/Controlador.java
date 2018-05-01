@@ -69,24 +69,24 @@ public class Controlador implements ActionListener{
         vista.jl_clientesabuscar.removeAllItems();
         vista.jl_listavehiculos.removeAllItems();
       
-        vista.jl_listaclientes.addItem("-Todo-");
+        vista.jl_listaclientes.addItem("*");
         vista.jl_listaclientes.addItem("nombre");
         vista.jl_listaclientes.addItem("dirección");
 
         vista.jl_listafacturas.addItem("monto");
         
-        vista.jl_listapolizas.addItem("-Todo-");
+        vista.jl_listapolizas.addItem("*");
         vista.jl_listapolizas.addItem("costo");
         vista.jl_listapolizas.addItem("prima");
         vista.jl_listapolizas.addItem("apertura");
         vista.jl_listapolizas.addItem("vencimiento");
        
-        vista.jl_listavehiculos.addItem("-Todo-");
+        vista.jl_listavehiculos.addItem("*");
         vista.jl_listavehiculos.addItem("placas");
         vista.jl_listavehiculos.addItem("marca");
         vista.jl_listavehiculos.addItem("modelo");
         
-        vista.jl_clientesabuscar.addItem("-Todos-"); //se debe elegir al menos un cliente
+        //vista.jl_clientesabuscar.addItem("*"); //se debe elegir al menos un cliente
         
        ArrayList <String> llenado;
         llenado = modelo.llenarClientes();
@@ -109,34 +109,45 @@ public class Controlador implements ActionListener{
         
             case "btn_vista_consult":
                 
-                String atrib_cliente = (String)vista.jl_listaclientes.getSelectedItem();
+        String atrib_cliente = (String)vista.jl_listaclientes.getSelectedItem();
         String atrib_vehic = (String)vista.jl_listavehiculos.getSelectedItem();
         String atrib_poliza = (String)vista.jl_listapolizas.getSelectedItem();
         String atrib_factura = (String)vista.jl_listafacturas.getSelectedItem();
         
         int cli_abuscar = vista.jl_listaclientes.getSelectedIndex();
         
-        //modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
-        ArrayList <String> parametros_consulta = new ArrayList<String>();
-        parametros_consulta.add(atrib_cliente);
-        parametros_consulta.add(atrib_vehic);
-        parametros_consulta.add(atrib_factura);
-        parametros_consulta.add(atrib_poliza);
-        String consulta_hecha=""; //va a almacenar todo en un solo parrafo
         
-        ArrayList <String> consultas_imprimir;
         
-        consultas_imprimir = modelo.hacerConsulta(parametros_consulta, cli_abuscar);
+        String [][] consulta_hecha =modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
+        
        
+        for(int i =0; i<consulta_hecha.length; i++){ // imprime los resultados de las consultas en la consola
         
-        for (String tupla : consultas_imprimir){
-            consulta_hecha+=tupla;
-            consulta_hecha+="\n";
+            for (int j=0; j<consulta_hecha[i].length ; i ++){
+                System.out.println(" ");
+                System.out.print(consulta_hecha[i][j]);
+            }
+            
         }
         
         
-                System.out.println(consulta_hecha);
-        vista.lb_mostrar_consultas.setText(consulta_hecha);
+        String consulta_imprimir ="";
+        
+        for(int i =0; i<consulta_hecha.length; i++){ //va a crear el texto
+        
+            for (int j=0; j<consulta_hecha[i].length ; i ++){
+                
+                consulta_imprimir= consulta_imprimir + consulta_hecha[i][j]; //agrega el elemento de la matriz
+                consulta_imprimir =consulta_imprimir +" "; //le pone un espacio
+            }
+                consulta_imprimir= consulta_imprimir+"\n";
+            
+        }
+                System.out.println(consulta_imprimir);
+        
+       vista.lb_mostrar_consultas.setText(consulta_imprimir);
+       
+        
                 
                 break;
                 

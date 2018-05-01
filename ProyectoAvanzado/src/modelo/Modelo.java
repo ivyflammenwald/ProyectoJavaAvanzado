@@ -357,48 +357,55 @@ public class Modelo {
     // metodos para la vista
     
     
-    public ArrayList<String> hacerConsulta(ArrayList<String> parametros, int cliabuscar){
+    public String[][] hacerConsulta(String cli, String veh, String fac, String po, int cliabuscar){
     
         // se va a definir que variables se buscan 
         // en el arraylist vienen  los string con el nombre de los atributos que se va a buscar en las tablas
         // con este array se van a hacer las consultas, pero como no existe una columna todos, se cambia por * para que
         //sea una consulta valida
         
-        ArrayList<String> resultados = new ArrayList <String>();
-        
-        for (String s : parametros){
-            if(s.equals("-Todo-")){ // si tiene un valor distinto a uno utilizable
-                s ="*";
-            }
-            System.out.println(s);
-            
-        }
-        
+        String[][] resultados = null;
         
         String query = "SELECT cliente.? , vehiculo.? , factura.?, poliza.? FROM cliente INNER JOIN poliza ON cliente.id_cliente = poliza.id_cliente"
                 + " INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
                 + " INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
                 + "  WHERE id_cliente = ?;"; //definir consulta
         
-        String query2 = "SELECT cliente."+parametros.get(0)+", vehiculo."+parametros.get(1)+" , factura."+parametros.get(2)+", poliza."+parametros.get(3)+" FROM cliente INNER JOIN poliza ON cliente.id_cliente = poliza.id_cliente"
+        String query2 = "SELECT cliente."+cli+", vehiculo."+veh+" , factura."+fac+", poliza."+po+" FROM cliente INNER JOIN poliza ON cliente.id_cliente = poliza.id_cliente"
                 + " INNER JOIN vehiculo ON vehiculo.id_vehiculo = poliza.id_vehiculo"
                 + " INNER JOIN factura ON vehiculo.id_factura = factura.id_factura"
                 + "  WHERE id_cliente ="+cliabuscar+";"; //definir consulta
         
+        
         ResultSet rs; 
-        System.out.println(query2);
-        System.out.println(query);
+        
+        /* ResultSet rs;
+        try {
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rs = stmt.getResultSet();
+            System.out.println("Consulta exitosa: ");
+            
+            while(rs.next()){
+                int id = rs.getInt("id_factura");
+                double monto = rs.getDouble("monto");
+                subirPoliza(id, monto);
+            }
+            rs.close();
+        } catch (Exception e) {}*/
+        
         
         try {
+            
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query2);
             rs = stmt.getResultSet();
             
             ps = conn.prepareStatement(query);
-            ps.setString(1, parametros.get(0));  // atrib de clientes
-            ps.setString(2, parametros.get(1)); //atrib de vehiculo
-            ps.setString(3, parametros.get(2)); //atrib de factura
-            ps.setString(4, parametros.get(3)); //atrib de poliza
+            ps.setString(1, cli);  // atrib de clientes
+            ps.setString(2, veh); //atrib de vehiculo
+            ps.setString(3, fac); //atrib de factura
+            ps.setString(4, po); //atrib de poliza
             
             if(cliabuscar == 1){ //si seleccionaron todos los clientes
                 ps.setString(5, "*");
@@ -407,6 +414,7 @@ public class Modelo {
             }
            
             System.out.println(ps);
+            System.out.println(query2);
             
             //rs = ps.executeQuery(query);
             //rs = ps.getResultSet();
@@ -414,55 +422,62 @@ public class Modelo {
             System.out.println("Consulta exitosa: ");
             System.out.println(rs);
             
-            String tuplaconsulta="";
             
             String datoscliente ="";
             String datosvehic="";
             String datosfact="";
             String datospoliza="";
             
+            int i=0;
+            System.out.println("REALIZANDO CONSULTA");
             
             while (rs.next()) {
                 
-                if(parametros.get(0).equals("*")){ //si es select * de cliente
-                    datoscliente = rs.getString("nombre");
-                    datoscliente+=" ";
-                    datoscliente+=rs.getString("direccion");
+                if(cli.equals("*")){ //si es select * de cliente
+                    String datosclientenom = rs.getString("nombre");
+                    String datosclientedir=rs.getString("direccion");
+                    datoscliente= datosclientenom+" "+datosclientedir;
                 }else{
-                    datoscliente = rs.getString(parametros.get(0)); //el parametro es el que se haya pedido
+                    datoscliente = rs.getString(cli); //el parametro es el que se haya pedido
                 }
                 
-                if(parametros.get(1).equals("*")){ //si es select * de vehiculos  
-                    datosvehic = rs.getString("placas");
-                    datosvehic+=" ";
-                    datosvehic+=rs.getString("marca");
-                    datosvehic+=" ";
-                    datosvehic+=rs.getString("modelo");
-                    datosvehic+=" ";
+                
+                
+                if(veh.equals("*")){ //si es select * de vehiculos  
+                    String datosvehicpl = rs.getString("placas");
+                    String datosvehicma =rs.getString("marca");
+                    String datosvehicmo =rs.getString("modelo");
+                    datosvehic+=datosvehicpl+" "+datosvehicma+" "+datosvehicmo;
+                    
                 }else{
-                    datosvehic = rs.getString(parametros.get(1)); //el parametro es el que se haya pedido
+                    datosvehic = rs.getString(veh); //el parametro es el que se haya pedido
                 }
                 
                
-                datosfact = rs.getString(parametros.get(2)); //el parametro es el que se haya pedido
+                datosfact = rs.getString(fac); //el parametro es el que se haya pedido
                 
                 
-                if(parametros.get(3).equals("*")){ //si es select * de poliza 
-                    datospoliza = rs.getString("costo");
-                    datospoliza+=" ";
-                    datospoliza+=rs.getString("prima");
-                     datospoliza+=" ";
-                    datospoliza+=rs.getString("apertura");
+                if(po.equals("*")){ //si es select * de poliza 
+                    
+                    String datospolizaco = rs.getString("costo");
+                    String datospolizapr =rs.getString("prima");
+                    String datospolizaap =rs.getString("apertura");
+                    datospoliza=datospolizaco+" "+datospolizapr+" "+datospolizaap; 
+                    
                 }else{
-                    datospoliza = rs.getString(parametros.get(3)); //el parametro es el que se haya pedido
+                    datospoliza = rs.getString(po); //el parametro es el que se haya pedido
                 }
                 
-                tuplaconsulta=datoscliente+", "+datosvehic+", "+datosfact+", "+datospoliza; //junta toda una tupla en un string
-                resultados.add(tuplaconsulta); //aniade el string al arreglo de resultados
-           
-                System.out.println(tuplaconsulta);
                 
-                tuplaconsulta="";
+                
+                
+               resultados[i][0]= datoscliente;
+               resultados[i][1] = datosvehic;
+               resultados[i][2] = datosfact;
+               resultados[i][3] = datospoliza;
+               
+               i++;
+        
                 datosvehic="";
                 datoscliente="";
                 datosfact ="";
@@ -471,12 +486,11 @@ public class Modelo {
             }
             
             
-            rs.close();
+           rs.close();
+            
         } catch (Exception e) {}
         
         return resultados;
-       
-        
     }
     
     public ArrayList llenarClientes(){ //EMANUEL hay que definir este metodo
