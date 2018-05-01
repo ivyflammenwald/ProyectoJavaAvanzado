@@ -116,19 +116,19 @@ public class Controlador implements ActionListener{
         
         int cli_abuscar = vista.jl_listaclientes.getSelectedIndex();
         
+        int indmax = vista.jl_listaclientes.getItemCount();
         
-        
-        String [][] consulta_hecha =modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar);
+        String [][] consulta_hecha = modelo.hacerConsulta(atrib_cliente, atrib_vehic, atrib_poliza, atrib_factura, cli_abuscar, indmax);
         
        
-        for(int i =0; i<consulta_hecha.length; i++){ // imprime los resultados de las consultas en la consola
-        
-            for (int j=0; j<consulta_hecha[i].length ; i ++){
+        for (String[] consulta_hecha1 : consulta_hecha) {
+            // imprime los resultados de las consultas en la consola
+            for (String consulta_hecha11 : consulta_hecha1) {
                 System.out.println(" ");
-                System.out.print(consulta_hecha[i][j]);
+                System.out.println(consulta_hecha11);
             }
-            
         }
+       
         
         
         String consulta_imprimir ="";
